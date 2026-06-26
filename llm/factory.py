@@ -1,0 +1,32 @@
+from typing import Optional
+
+from .base_client import BaseLLMClient
+from .openai_client import OpenAIClient
+
+
+def create_llm_client(
+    provider: str,
+    model: str,
+    base_url: Optional[str] = None,
+    **kwargs,
+) -> BaseLLMClient:
+    """Create an LLM client for the specified provider.
+
+    Args:
+        provider: LLM provider (openai, ollama, openrouter, xai, or custom)
+        model: Model name/identifier
+        base_url: Optional base URL for API endpoint
+        **kwargs: Additional provider-specific arguments
+
+    Returns:
+        Configured BaseLLMClient instance
+
+    Raises:
+        ValueError: If provider is not supported
+    """
+    provider_lower = provider.lower()
+
+    if provider_lower in ("openai", "ollama", "openrouter", "xai", "custom"):
+        return OpenAIClient(model, base_url, provider=provider_lower, **kwargs)
+
+    raise ValueError(f"Unsupported LLM provider: {provider}")
