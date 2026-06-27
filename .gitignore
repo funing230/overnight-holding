@@ -11,3 +11,4 @@ data/output/*
 !data/output/.gitkeep
 venv/
 .venv/
+.venv-kronos/

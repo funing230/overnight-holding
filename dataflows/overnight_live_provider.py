@@ -77,6 +77,8 @@ LIVE_SCORE_SPECS = [
     ("is_new_listing_180d", 0.02, False),
     ("prev_limit_move_like_1d", 0.02, True),
     ("prev_soft_outlier_1d", 0.01, True),
+    # Kronos model-driven prediction (offline pre-computed)
+    ("kronos_pred_return_1d", 0.06, True),
 ]
 
 
@@ -541,6 +543,26 @@ def _load_ashare_enrichment_features(ashare_enrichment_features_path: str | Path
 
 
 
+
+def _load_kronos_features(kronos_features_path: str | Path) -> pd.DataFrame:
+    """Load Kronos pre-computed prediction features."""
+    feature_path = Path(kronos_features_path)
+    if not feature_path.exists():
+        raise FileNotFoundError(f"Kronos features not found: {feature_path}")
+    try:
+        feat = pd.read_csv(feature_path)
+    except pd.errors.EmptyDataError:
+        feat = pd.DataFrame(columns=["ts_code", "kronos_pred_return_1d", "kronos_degraded"])
+    if "ts_code" not in feat.columns:
+        raise ValueError(f"Kronos features missing ts_code: {feature_path}")
+    for col, default in [("kronos_pred_return_1d", pd.NA), ("kronos_degraded", False)]:
+        if col not in feat.columns:
+            feat[col] = default
+    feat = feat[["ts_code", "kronos_pred_return_1d", "kronos_degraded"]].copy()
+    feat["kronos_pred_return_1d"] = pd.to_numeric(feat["kronos_pred_return_1d"], errors="coerce")
+    feat["kronos_degraded"] = feat["kronos_degraded"].astype(str).str.lower().isin(["true", "1", "yes"])
+    return feat.drop_duplicates("ts_code", keep="last")
+
 def _load_xueqiu_hot_features(xueqiu_hot_features_path):
     feature_path = Path(xueqiu_hot_features_path)
     if not feature_path.exists():
@@ -590,6 +612,7 @@ def apply_multi_stage_review_fusion(
     xueqiu_hot_features_path: str | Path | None = None,
     twitter_features_path: str | Path | None = None,
     ashare_enrichment_features_path: str | Path | None = None,
+    kronos_features_path: str | Path | None = None,
     live_weight: float = 0.60,
     heavy_weight: float = 0.25,
     light_weight: float = 0.15,
@@ -638,6 +661,8 @@ def apply_multi_stage_review_fusion(
         ("openclaw_catalyst_summary", ""),
         ("ashare_enrichment_bonus_score", 0.0),
         ("ashare_enrichment_risk_penalty", 0.0),
+        ("kronos_pred_return_1d", pd.NA),
+        ("kronos_degraded", False),
     ]:
         out[col] = default
 
@@ -695,6 +720,15 @@ def apply_multi_stage_review_fusion(
                 out[col] = out[review_col].combine_first(out[col]) if col in out.columns else out[review_col]
                 out = out.drop(columns=[review_col])
 
+    if kronos_features_path:
+        kronos = _load_kronos_features(kronos_features_path)
+        out = out.merge(kronos, on="ts_code", how="left", suffixes=("", "_kronos"))
+        for col in ["kronos_pred_return_1d", "kronos_degraded"]:
+            review_col = f"{col}_kronos"
+            if review_col in out.columns:
+                out[col] = out[review_col].combine_first(out[col])
+                out = out.drop(columns=[review_col])
+
     if xueqiu_hot_features_path:
         xq = _load_xueqiu_hot_features(xueqiu_hot_features_path)
         out = out.merge(xq, on="ts_code", how="left", suffixes=("", "_xq"))
@@ -747,6 +781,9 @@ def apply_multi_stage_review_fusion(
     out["openclaw_catalyst_summary"] = out["openclaw_catalyst_summary"].fillna("").astype(str)
     out["ashare_enrichment_bonus_score"] = pd.to_numeric(out["ashare_enrichment_bonus_score"], errors="coerce").fillna(0.0).clip(0.0, 0.12)
     out["ashare_enrichment_risk_penalty"] = pd.to_numeric(out["ashare_enrichment_risk_penalty"], errors="coerce").fillna(0.0).clip(0.0, 0.08)
+    out["kronos_pred_return_1d"] = pd.to_numeric(out["kronos_pred_return_1d"], errors="coerce")
+    kronos_bonus = out["kronos_pred_return_1d"].fillna(0.0).clip(-0.06, 0.06)
+    kronos_bonus = kronos_bonus.where(out["kronos_degraded"].fillna(True).eq(False), 0.0)
 
     heavy_tier_penalty = out["heavy_tier"].map({"core": 0.0, "watch": 0.05, "reject": 0.20}).fillna(0.05)
     light_risk_penalty = out["agent_risk_level"].astype(str).str.lower().map({"low": 0.0, "medium": 0.03, "high": 0.12}).fillna(0.03)
@@ -762,6 +799,7 @@ def apply_multi_stage_review_fusion(
         + out["ashare_enrichment_bonus_score"]
         + out.get("xueqiu_bonus_score", 0.0)
         + out.get("twitter_bonus_score", 0.0)
+        + kronos_bonus
         - heavy_tier_penalty
         - light_risk_penalty
         - out["openclaw_risk_penalty"]
@@ -812,6 +850,7 @@ def run_live_inference(
     xueqiu_hot_features_path: str | Path | None = None,
     twitter_features_path: str | Path | None = None,
     ashare_enrichment_features_path: str | Path | None = None,
+    kronos_features_path: str | Path | None = None,
     live_weight: float = 0.75,
     agent_weight: float = 0.25,
     heavy_weight: float = 0.25,
@@ -839,6 +878,7 @@ def run_live_inference(
             xueqiu_hot_features_path=xueqiu_hot_features_path,
             twitter_features_path=twitter_features_path,
             ashare_enrichment_features_path=ashare_enrichment_features_path,
+            kronos_features_path=kronos_features_path,
             live_weight=live_weight,
             heavy_weight=heavy_weight,
             light_weight=light_weight,

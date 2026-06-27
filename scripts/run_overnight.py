@@ -405,6 +405,7 @@ def main() -> None:
     p.add_argument("--ashare-enrichment-top-k", type=int, default=50, help="Top-K recall candidates to enrich")
     p.add_argument("--disable-ashare-research", action="store_true", help="Skip Eastmoney research report enrichment")
     p.add_argument("--disable-ashare-business", action="store_true", help="Skip THS business/company profile enrichment")
+    p.add_argument("--kronos-features-path", default=None, help="Path to pre-computed Kronos features CSV (offline; run build_kronos_features.py first)")
     args = p.parse_args()
 
     run_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -538,6 +539,7 @@ def main() -> None:
             xueqiu_hot_features_path=news_social.get("xueqiu_hot_features_path"),
             twitter_features_path=news_social.get("twitter_features_path"),
             ashare_enrichment_features_path=None if ashare_enrichment is None else ashare_enrichment.get("features_path"),
+            kronos_features_path=args.kronos_features_path,
             live_weight=args.live_weight,
             heavy_weight=args.heavy_weight,
             light_weight=args.light_weight,
