@@ -1,0 +1,21 @@
+{
+  "trade_date": "2026-06-29",
+  "source": "tencent",
+  "fallback_source": "tushare",
+  "source_errors": [],
+  "run_ts": "2026-06-29T15:48:02",
+  "universe_count": 324,
+  "snapshot_path": "data/snapshots/snapshot_20260629_tencent.csv",
+  "quality": {
+    "expected_count": 324,
+    "returned_count": 324,
+    "usable_count": 324,
+    "coverage_ratio": 1.0,
+    "min_quote_time": "15:46:57",
+    "max_quote_time": "15:47:58",
+    "stale_time_threshold": null,
+    "freshness_ok": true,
+    "ok": true,
+    "min_coverage": 0.95
+  }
+}

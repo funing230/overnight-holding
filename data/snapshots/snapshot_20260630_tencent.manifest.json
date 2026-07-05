@@ -1,0 +1,16 @@
+{
+  "trade_date": "2026-06-30",
+  "source": "tencent",
+  "run_ts": "2026-06-30T17:04:34",
+  "universe_count": 324,
+  "snapshot_path": "data/snapshots/snapshot_20260630_tencent.csv",
+  "quality": {
+    "expected_count": 324,
+    "returned_count": 324,
+    "usable_count": 324,
+    "coverage_ratio": 1.0,
+    "min_quote_time": "16:14:00",
+    "max_quote_time": "16:15:00",
+    "freshness_ok": true
+  }
+}

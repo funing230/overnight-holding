@@ -10,9 +10,9 @@ from dataflows.openclaw_context_provider import (
     build_openclaw_feature_frame,
     resolve_openclaw_context,
 )
-from dataflows.overnight_live_heavy_review_provider import build_heavy_review_payload
+from dataflows.overnight_live_selector_review_provider import build_selector_review_payload
 from dataflows.overnight_live_provider import apply_multi_stage_review_fusion
-from dataflows.overnight_live_review_provider import build_live_review_payload, load_live_candidate_pool
+from dataflows.overnight_live_scorer_review_provider import build_scorer_review_payload, load_live_candidate_pool
 from dataflows.overnight_news_social_context import NewsContextResult
 
 
@@ -56,12 +56,12 @@ def main() -> None:
         theme_hot_features=[],
     )
     oc = {"summary": ctx.summary, "payload": ctx.payload}
-    heavy_payload = build_heavy_review_payload(pool, DEFAULT_TRADE_DATE, top_k=5, target_top_n=3, snapshot_time_hint="14:35", news_social_context=news_ctx, openclaw_context=oc)
-    light_payload = build_live_review_payload(pool, DEFAULT_TRADE_DATE, top_k=5, target_top_n=3, snapshot_time_hint="14:35", news_social_context=news_ctx, openclaw_context=oc)
-    _assert("\"openclaw_context\"" in heavy_payload, "Heavy payload summary missing openclaw_context")
-    _assert("macro_news_top" in heavy_payload and "ticker_event_top" in heavy_payload, "Heavy payload missing OpenClaw prompt block")
-    _assert("\"openclaw_context\"" in light_payload, "Light payload summary missing openclaw_context")
-    _assert("macro_news_top" in light_payload and "ticker_event_top" in light_payload, "Light payload missing OpenClaw prompt block")
+    selector_payload = build_selector_review_payload(pool, DEFAULT_TRADE_DATE, top_k=5, target_top_n=3, snapshot_time_hint="14:35", news_social_context=news_ctx, openclaw_context=oc)
+    scorer_payload = build_scorer_review_payload(pool, DEFAULT_TRADE_DATE, top_k=5, target_top_n=3, snapshot_time_hint="14:35", news_social_context=news_ctx, openclaw_context=oc)
+    _assert("\"openclaw_context\"" in heavy_payload, "Selector payload summary missing openclaw_context")
+    _assert("macro_news_top" in heavy_payload and "ticker_event_top" in heavy_payload, "Selector payload missing OpenClaw prompt block")
+    _assert("\"openclaw_context\"" in light_payload, "Scorer payload summary missing openclaw_context")
+    _assert("macro_news_top" in light_payload and "ticker_event_top" in light_payload, "Scorer payload missing OpenClaw prompt block")
 
     base = pd.DataFrame([
         {"ts_code": "600009.SH", "overnight_live_score": 0.60, "live_pass_risk_filter": True, "live_reject_reasons": ""},
@@ -87,8 +87,8 @@ def main() -> None:
         "feature_rows": int(len(feature_df)),
         "feature_columns": list(feature_df.columns),
         "delta_check": merged.to_dict(orient="records"),
-        "heavy_prompt_has_openclaw": True,
-        "light_prompt_has_openclaw": True,
+        "selector_prompt_has_openclaw": True,
+        "scorer_prompt_has_openclaw": True,
         "status": "ok",
     }
     report_path = DEFAULT_OUT_DIR / "openclaw_smoke_report.json"

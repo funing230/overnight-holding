@@ -1,0 +1,56 @@
+{
+  "mode": "fast_one_shot_review_after_heavy",
+  "trade_date": "2026-06-29",
+  "llm": "yuanlan4:chat",
+  "candidate_count": 15,
+  "target_top_n": 5,
+  "snapshot_time_hint": "15:47:58",
+  "summary": {
+    "candidate_count": 15,
+    "source": "live_preclose_buffer",
+    "industry_counts": {
+      "火力发电": 2,
+      "铜": 2,
+      "半导体": 1,
+      "煤炭开采": 1,
+      "水力发电": 1,
+      "小金属": 1,
+      "电气设备": 1,
+      "家用电器": 1,
+      "农药化肥": 1,
+      "银行": 1,
+      "电器仪表": 1,
+      "铁路": 1,
+      "证券": 1
+    },
+    "market_counts": {
+      "主板": 13,
+      "科创板": 1,
+      "创业板": 1
+    },
+    "overnight_live_score": {
+      "min": 0.6597993827160495,
+      "median": 0.6943364197530866,
+      "max": 0.755030864197531
+    },
+    "live_return_vs_pre_close": {
+      "min": 0.0051124744376278,
+      "median": 0.0232558139534884,
+      "max": 0.0806301171105814
+    },
+    "from_day_high": {
+      "min": -0.0388731079030313,
+      "median": -0.0062402496099843,
+      "max": -0.002202643171806
+    },
+    "live_range_pos": {
+      "min": 0.5084467771034933,
+      "median": 0.8292682926829283,
+      "max": 0.9500000000000012
+    }
+  },
+  "news_social_context": null,
+  "openclaw_context": null,
+  "elapsed_seconds": 107.962,
+  "light_include_news_social_context": false
+}

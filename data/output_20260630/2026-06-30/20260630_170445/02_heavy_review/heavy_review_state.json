@@ -1,0 +1,269 @@
+{
+  "mode": "heavy_top50_to_top15_review",
+  "trade_date": "2026-06-30",
+  "llm": "yuanlan4:deepthink",
+  "candidate_count": 50,
+  "target_top_n": 15,
+  "snapshot_time_hint": "16:15:00",
+  "summary": {
+    "candidate_count": 50,
+    "source": "live_preclose_buffer",
+    "industry_counts": {
+      "证券": 9,
+      "家用电器": 4,
+      "铜": 3,
+      "水力发电": 2,
+      "小金属": 2,
+      "电气设备": 2,
+      "IT设备": 2,
+      "农药化肥": 2,
+      "火力发电": 2,
+      "银行": 2,
+      "白酒": 2,
+      "全国地产": 2,
+      "化纤": 1,
+      "半导体": 1,
+      "家居用品": 1,
+      "软饮料": 1,
+      "其他建材": 1,
+      "煤炭开采": 1,
+      "电器仪表": 1,
+      "汽车配件": 1,
+      "保险": 1,
+      "通信设备": 1,
+      "生物制药": 1,
+      "化工原料": 1,
+      "普钢": 1,
+      "旅游服务": 1,
+      "工程机械": 1,
+      "软件服务": 1
+    },
+    "market_counts": {
+      "主板": 44,
+      "创业板": 5,
+      "科创板": 1
+    },
+    "overnight_live_score": {
+      "min": 0.6037808641975309,
+      "median": 0.6515354938271605,
+      "max": 0.7543827160493828
+    },
+    "live_return_vs_pre_close": {
+      "min": -0.0352877307274702,
+      "median": 0.0028456584530923,
+      "max": 0.0777459407831899
+    },
+    "from_day_high": {
+      "min": -0.0397915077548943,
+      "median": -0.0109589119615116,
+      "max": 0.0
+    },
+    "live_range_pos": {
+      "min": 0.0656716417910445,
+      "median": 0.6885813148788902,
+      "max": 1.0
+    }
+  },
+  "news_social_context": {
+    "vendor": "configured_news_vendor",
+    "degraded": true,
+    "degrade_reasons": [
+      "ticker_news_fetch_failed"
+    ],
+    "ticker_news_success_count": 10,
+    "ticker_news_failure_count": 50,
+    "global_news_success_count": 10,
+    "global_news_failure_count": 0,
+    "social_hot_success_count": 0,
+    "theme_hot_success_count": 10,
+    "social_hot_failure_count": 0,
+    "xueqiu_hot_success_count": 0,
+    "twitter_success_count": 0,
+    "failure_reason_counts": {
+      "RuntimeError": 50
+    },
+    "news_top10_count": 10,
+    "social_top10_count": 0,
+    "global_news_top10_count": 10,
+    "news_ticker_counts": {
+      "300274.SZ": 1,
+      "002180.SZ": 1,
+      "605117.SH": 1,
+      "002415.SZ": 1,
+      "688256.SH": 1,
+      "603799.SH": 1,
+      "000063.SZ": 1,
+      "603260.SH": 1,
+      "600111.SH": 1,
+      "601100.SH": 1
+    },
+    "social_ticker_counts": {},
+    "social_hot_summary": {
+      "enabled": false
+    },
+    "theme_hot_summary": {
+      "enabled": true,
+      "candidate_count": 50,
+      "matched_candidate_count": 10,
+      "theme_hit_total_count": 14,
+      "top_matches": [
+        {
+          "ts_code": "002180.SZ",
+          "name": "奔图科技",
+          "industry": "IT设备",
+          "theme_match_count": 2,
+          "theme_source_count": 1,
+          "theme_names": "AI/终端智能化|机器人/智能制造",
+          "theme_bonus_score": 0.04
+        },
+        {
+          "ts_code": "002415.SZ",
+          "name": "海康威视",
+          "industry": "IT设备",
+          "theme_match_count": 2,
+          "theme_source_count": 1,
+          "theme_names": "AI/终端智能化|机器人/智能制造",
+          "theme_bonus_score": 0.04
+        },
+        {
+          "ts_code": "300274.SZ",
+          "name": "阳光电源",
+          "industry": "电气设备",
+          "theme_match_count": 2,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电|机器人/智能制造",
+          "theme_bonus_score": 0.04
+        },
+        {
+          "ts_code": "605117.SH",
+          "name": "德业股份",
+          "industry": "电气设备",
+          "theme_match_count": 2,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电|机器人/智能制造",
+          "theme_bonus_score": 0.04
+        },
+        {
+          "ts_code": "000063.SZ",
+          "name": "中兴通讯",
+          "industry": "通信设备",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "AI/终端智能化",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "600111.SH",
+          "name": "北方稀土",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "601100.SH",
+          "name": "恒立液压",
+          "industry": "工程机械",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "机器人/智能制造",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603260.SH",
+          "name": "合盛硅业",
+          "industry": "化工原料",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603799.SH",
+          "name": "华友钴业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "688256.SH",
+          "name": "寒武纪",
+          "industry": "半导体",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "AI/终端智能化",
+          "theme_bonus_score": 0.03
+        }
+      ]
+    },
+    "xueqiu_hot_summary": {
+      "enabled": false
+    },
+    "twitter_summary": {
+      "enabled": false
+    },
+    "notes": [
+      "ticker_news_fetch_failed:600886.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000301.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:688256.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000630.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:300059.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:603833.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:603799.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:300274.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:605499.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600362.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601901.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600690.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:002180.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000786.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601995.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600188.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000792.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:300124.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601881.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000408.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600027.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601377.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601689.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:605117.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601939.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601336.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000596.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:603195.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601059.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000063.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600030.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:300142.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:002415.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000069.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:001979.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:002050.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000333.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:603260.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600010.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600011.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600111.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600674.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601838.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:600809.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601878.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601888.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601100.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:601899.SH:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:000166.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_fetch_failed:300496.SZ:RuntimeError:TUSHARE_TOKEN environment variable is not set. Set it in the project .env file or run: export TUSHARE_TOKEN='your-token-here'",
+      "ticker_news_proxy_recovered:10:688256.SH|603799.SH|300274.SZ|002180.SZ|605117.SH|000063.SZ|002415.SZ|603260.SH|600111.SH|601100.SH"
+    ]
+  },
+  "openclaw_context": {
+    "loaded": false,
+    "reason": "no_context_found_under_root",
+    "trade_date": "2026-06-30",
+    "root": "data/openclaw_context"
+  },
+  "elapsed_seconds": 111.239
+}

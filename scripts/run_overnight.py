@@ -3,9 +3,9 @@
 
 Pipeline:
 1. Deterministic recall from pre-close snapshot: Top50.
-2. Heavy TradingAgents2.0 review: Top50 -> Top15.
-3. Light TradingAgents2.0 fast review: Top15 -> structured scores.
-4. Final fusion on final snapshot: deterministic + heavy + light -> Top3/Top5.
+2. Selector (TradingAgents2.0) review: Top50 -> Top15.
+3. Scorer (TradingAgents2.0) review: Top15 -> structured scores.
+4. Final fusion on final snapshot: deterministic + selector + scorer -> Top3/Top5.
 """
 
 from __future__ import annotations
@@ -13,23 +13,29 @@ from __future__ import annotations
 import argparse
 import json
 import subprocess
+import sys
 import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any
+
+# Ensure project root is on sys.path
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
 import pandas as pd
 from langchain_core.messages import HumanMessage, SystemMessage
 
 from config.default_config import DEFAULT_CONFIG
 from dataflows.overnight_live_provider import run_live_inference
-from dataflows.overnight_live_heavy_review_provider import build_heavy_review_payload, write_heavy_review_artifacts
-from dataflows.overnight_live_review_provider import (
-    build_live_review_payload,
+from dataflows.overnight_live_selector_review_provider import build_selector_review_payload, write_selector_review_artifacts
+from dataflows.overnight_live_scorer_review_provider import (
+    build_scorer_review_payload,
     load_live_candidate_pool,
-    neutral_review_scores,
+    neutral_scorer_scores,
     summarize_live_candidates,
-    write_review_artifacts,
+    write_scorer_artifacts,
 )
 from dataflows.overnight_news_social_context import (
     build_news_social_context,
@@ -43,8 +49,8 @@ from dataflows.risk_veto_provider import build_risk_veto, RiskVetoPool
 
 DEFAULT_OUT_ROOT = Path("data/overnight_live_multistage")
 
-HEAVY_SYSTEM = """你是 TradingAgents2.0 的重度 pre-close research review agent。把 deterministic Top50 一夜持股法候选池压缩为 Top15 研究池，不直接给最终 Top5。只基于输入字段，不调用外部数据，不编造新闻/公告/财报。必须优先输出 HEAVY_REVIEW_JSON_START / HEAVY_REVIEW_JSON_END 包裹的 JSON。"""
-FAST_SYSTEM = """你是 TradingAgents2.0 的轻量化 pre-close review agent。快速审查 heavy Top15 研究池，输出 AGENT_REVIEW_JSON_START / AGENT_REVIEW_JSON_END 包裹的 JSON。只基于输入字段，不调用外部数据，不编造新闻/公告/财报。"""
+SELECTOR_SYSTEM = """你是 TradingAgents2.0 的筛选器（Selector）：把 deterministic Top50 一夜持股法候选池压缩为 Top15 研究池，不直接给最终 Top5。只基于输入字段，不调用外部数据，不编造新闻/公告/财报。必须优先输出 SELECTOR_REVIEW_JSON_START / SELECTOR_REVIEW_JSON_END 包裹的 JSON。"""
+SCORER_SYSTEM = """你是 TradingAgents2.0 的评分器（Scorer）：快速审查 selector Top15 研究池，输出 SCORER_REVIEW_JSON_START / SCORER_REVIEW_JSON_END 包裹的 JSON。只基于输入字段，不调用外部数据，不编造新闻/公告/财报。"""
 
 
 def _fmt_date(value: str) -> str:
@@ -108,7 +114,7 @@ def _llm(role: str, model_key: str | None, mode: str):
 def _run_heavy(args, candidate_pool_csv: str, out_dir: Path, snapshot_hint: str | None, news_social_context=None, openclaw_context=None, risk_veto: RiskVetoPool | None = None) -> dict[str, Any]:
     started = time.time()
     pool = load_live_candidate_pool(candidate_pool_csv).head(args.heavy_top_k).copy()
-    payload = build_heavy_review_payload(pool, args.trade_date, args.heavy_top_k, args.heavy_target_top_n, snapshot_hint, news_social_context=news_social_context, openclaw_context=openclaw_context)
+    payload = build_selector_review_payload(pool, args.trade_date, args.heavy_top_k, args.heavy_target_top_n, snapshot_hint, news_social_context=news_social_context, openclaw_context=openclaw_context)
     # ── Inject risk veto signals into heavy review prompt ──
     if risk_veto and risk_veto.vetoes:
         hard = [v for v in risk_veto.vetoes if v.severity == "hard"]
@@ -122,19 +128,19 @@ def _run_heavy(args, candidate_pool_csv: str, out_dir: Path, snapshot_hint: str 
             lines.append(f"\n{len(soft)} stock(s) have SOFT WARNING:")
             for v in soft:
                 lines.append(f"  - {v.ts_code}: {v.reason[:100]}")
-        lines.append("\nHard-veto stocks should be assigned heavy_tier='reject' with heavy_veto=true.")
+        lines.append("\nHard-veto stocks should be assigned selector_tier='reject' with selector_veto=true.")
         payload += "\n" + "\n".join(lines)
     _ensure_dir(out_dir)
-    (out_dir / "heavy_review_prompt.md").write_text(payload + "\n", encoding="utf-8")
+    (out_dir / "selector_review_prompt.md").write_text(payload + "\n", encoding="utf-8")
     if args.dry_run_heavy:
-        reviews = [{"ts_code": r["ts_code"], "heavy_score": 0.5, "heavy_tier": "watch", "heavy_veto": False, "heavy_adjustment": 0.0, "heavy_keep_rank": i + 1, "heavy_reason": "dry_run_heavy_neutral", "heavy_risk_flags": []} for i, r in pool.reset_index(drop=True).iterrows()]
-        decision = "HEAVY_REVIEW_JSON_START\n" + json.dumps({"trade_date": args.trade_date, "target_top_n": args.heavy_target_top_n, "reviews": reviews}, ensure_ascii=False, indent=2) + "\nHEAVY_REVIEW_JSON_END"
-        llm_label = "dry_run_heavy_neutral"
+        reviews = [{"ts_code": r["ts_code"], "selector_score": 0.5, "selector_tier": "watch", "selector_veto": False, "selector_adjustment": 0.0, "selector_keep_rank": i + 1, "selector_reason": "dry_run_selector_neutral", "selector_risk_flags": []} for i, r in pool.reset_index(drop=True).iterrows()]
+        decision = "SELECTOR_REVIEW_JSON_START\n" + json.dumps({"trade_date": args.trade_date, "target_top_n": args.heavy_target_top_n, "reviews": reviews}, ensure_ascii=False, indent=2) + "\nSELECTOR_REVIEW_JSON_END"
+        llm_label = "dry_run_selector_neutral"
     else:
         model, llm_label = _llm(args.heavy_role, args.heavy_model_key, args.heavy_mode)
-        decision = _content_text(model.invoke([SystemMessage(content=HEAVY_SYSTEM), HumanMessage(content=payload)]))
-    state = {"mode": "heavy_top50_to_top15_review", "trade_date": args.trade_date, "llm": llm_label, "candidate_count": int(len(pool)), "target_top_n": args.heavy_target_top_n, "snapshot_time_hint": snapshot_hint, "summary": summarize_live_candidates(pool, args.heavy_top_k), "news_social_context": summarize_news_social_context(news_social_context) if news_social_context is not None else None, "openclaw_context": None if openclaw_context is None else openclaw_context.get("summary"), "elapsed_seconds": round(time.time() - started, 3)}
-    paths = write_heavy_review_artifacts(out_dir, state, pool, decision, target_top_n=args.heavy_target_top_n)
+        decision = _content_text(model.invoke([SystemMessage(content=SELECTOR_SYSTEM), HumanMessage(content=payload)]))
+    state = {"mode": "selector_top50_to_top15_review", "trade_date": args.trade_date, "llm": llm_label, "candidate_count": int(len(pool)), "target_top_n": args.heavy_target_top_n, "snapshot_time_hint": snapshot_hint, "summary": summarize_live_candidates(pool, args.heavy_top_k), "news_social_context": summarize_news_social_context(news_social_context) if news_social_context is not None else None, "openclaw_context": None if openclaw_context is None else openclaw_context.get("summary"), "elapsed_seconds": round(time.time() - started, 3)}
+    paths = write_selector_review_artifacts(out_dir, state, pool, decision, target_top_n=args.heavy_target_top_n)
     return {"state": state, "paths": paths}
 
 
@@ -142,18 +148,18 @@ def _run_light(args, candidate_pool_csv: str, out_dir: Path, snapshot_hint: str 
     started = time.time()
     pool = load_live_candidate_pool(candidate_pool_csv).head(args.light_top_k).copy()
     light_news_context = news_social_context if args.light_include_news_social_context else None
-    payload = build_live_review_payload(pool, args.trade_date, args.light_top_k, args.final_top_n, snapshot_hint, news_social_context=light_news_context, openclaw_context=openclaw_context)
+    payload = build_scorer_review_payload(pool, args.trade_date, args.light_top_k, args.final_top_n, snapshot_hint, news_social_context=light_news_context, openclaw_context=openclaw_context)
     _ensure_dir(out_dir)
-    (out_dir / "fast_agent_review_prompt.md").write_text(payload + "\n", encoding="utf-8")
+    (out_dir / "scorer_review_prompt.md").write_text(payload + "\n", encoding="utf-8")
     if args.dry_run_light:
-        scores = neutral_review_scores(pool, reason="dry_run_light_neutral")
-        decision = "AGENT_REVIEW_JSON_START\n" + json.dumps({"trade_date": args.trade_date, "target_top_n": args.final_top_n, "reviews": json.loads(scores.to_json(orient="records", force_ascii=False))}, ensure_ascii=False, indent=2) + "\nAGENT_REVIEW_JSON_END"
-        llm_label = "dry_run_light_neutral"
+        scores = neutral_scorer_scores(pool, reason="dry_run_scorer_neutral")
+        decision = "SCORER_REVIEW_JSON_START\n" + json.dumps({"trade_date": args.trade_date, "target_top_n": args.final_top_n, "reviews": json.loads(scores.to_json(orient="records", force_ascii=False))}, ensure_ascii=False, indent=2) + "\nSCORER_REVIEW_JSON_END"
+        llm_label = "dry_run_scorer_neutral"
     else:
         model, llm_label = _llm(args.light_role, args.light_model_key, args.light_mode)
-        decision = _content_text(model.invoke([SystemMessage(content=FAST_SYSTEM), HumanMessage(content=payload)]))
-    state = {"mode": "fast_one_shot_review_after_heavy", "trade_date": args.trade_date, "llm": llm_label, "candidate_count": int(len(pool)), "target_top_n": args.final_top_n, "snapshot_time_hint": snapshot_hint, "summary": summarize_live_candidates(pool, args.light_top_k), "news_social_context": summarize_news_social_context(light_news_context) if light_news_context is not None else None, "openclaw_context": None if openclaw_context is None else openclaw_context.get("summary"), "elapsed_seconds": round(time.time() - started, 3), "light_include_news_social_context": bool(args.light_include_news_social_context)}
-    paths = write_review_artifacts(out_dir, state, pool, decision)
+        decision = _content_text(model.invoke([SystemMessage(content=SCORER_SYSTEM), HumanMessage(content=payload)]))
+    state = {"mode": "scorer_one_shot_review_after_selector", "trade_date": args.trade_date, "llm": llm_label, "candidate_count": int(len(pool)), "target_top_n": args.final_top_n, "snapshot_time_hint": snapshot_hint, "summary": summarize_live_candidates(pool, args.light_top_k), "news_social_context": summarize_news_social_context(light_news_context) if light_news_context is not None else None, "openclaw_context": None if openclaw_context is None else openclaw_context.get("summary"), "elapsed_seconds": round(time.time() - started, 3), "scorer_include_news_social_context": bool(args.light_include_news_social_context)}
+    paths = write_scorer_artifacts(out_dir, state, pool, decision)
     return {"state": state, "paths": paths}
 
 
@@ -352,7 +358,7 @@ def _build_and_write_ashare_enrichment(args, candidate_pool_csv: str, out_dir: P
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Run multistage overnight live workflow: Top50 -> heavy Top15 -> light -> final TopN")
+    p = argparse.ArgumentParser(description="Run multistage overnight live workflow: Top50 -> selector Top15 -> scorer -> final TopN")
     p.add_argument("--trade-date", required=True)
     p.add_argument("--prefilter-snapshot-csv", required=True, help="Early/pre-close snapshot for Top50 recall")
     p.add_argument("--final-snapshot-csv", default=None, help="Final 14:55 snapshot; defaults to prefilter snapshot for smoke tests")
@@ -419,8 +425,8 @@ def main() -> None:
         run_dir / "01b_minute_prefetch",
         run_dir / "01c_news_social_top10",
         run_dir / "01d_ashare_enrichment",
-        run_dir / "02_heavy_review",
-        run_dir / "03_light_review",
+        run_dir / "02_selector_review",
+        run_dir / "03_scorer_review",
         run_dir / "04_final_fusion",
     )
 
@@ -485,15 +491,15 @@ def main() -> None:
             ashare_enrichment = _build_and_write_ashare_enrichment(args, recall_paths["candidate_pool"], ashare_enrich_dir, top_k=args.ashare_enrichment_top_k)
 
     heavy_paths = {
-        "heavy_review_report": str(heavy_dir / "heavy_review_report.md"),
-        "heavy_review_scores": str(heavy_dir / "heavy_review_scores.csv"),
-        "heavy_review_state": str(heavy_dir / "heavy_review_state.json"),
-        "heavy_review_parse_manifest": str(heavy_dir / "heavy_review_parse_manifest.json"),
-        "heavy_selected_top15": str(heavy_dir / "heavy_selected_top15.csv"),
-        "heavy_review_prompt": str(heavy_dir / "heavy_review_prompt.md"),
+        "selector_review_report": str(heavy_dir / "selector_review_report.md"),
+        "selector_review_scores": str(heavy_dir / "selector_review_scores.csv"),
+        "selector_review_state": str(heavy_dir / "selector_review_state.json"),
+        "selector_review_parse_manifest": str(heavy_dir / "selector_review_parse_manifest.json"),
+        "selector_selected_top15": str(heavy_dir / "selector_selected_top15.csv"),
+        "selector_review_prompt": str(heavy_dir / "selector_review_prompt.md"),
     }
-    if args.resume_run_dir and _maybe_resume_stage(heavy_paths, ["heavy_review_scores", "heavy_selected_top15", "heavy_review_state"]):
-        heavy_state = json.loads(Path(heavy_paths["heavy_review_state"]).read_text(encoding="utf-8"))
+    if args.resume_run_dir and _maybe_resume_stage(heavy_paths, ["selector_review_scores", "selector_selected_top15", "selector_review_state"]):
+        heavy_state = json.loads(Path(heavy_paths["selector_review_state"]).read_text(encoding="utf-8"))
         heavy = {"state": heavy_state, "paths": heavy_paths}
     else:
         # ── Risk veto scan: check candidates for fundamental risks ──
@@ -503,16 +509,16 @@ def main() -> None:
         heavy = _run_heavy(args, recall_paths["candidate_pool"], heavy_dir, pre_hint, news_social_context=news_social["context"], openclaw_context=news_social.get("openclaw_context"), risk_veto=risk_veto_pool)
 
     light_paths = {
-        "agent_review_report": str(light_dir / "agent_review_report.md"),
-        "agent_review_scores": str(light_dir / "agent_review_scores.csv"),
-        "agent_review_state": str(light_dir / "agent_review_state.json"),
-        "agent_review_parse_manifest": str(light_dir / "agent_review_parse_manifest.json"),
+        "scorer_review_report": str(light_dir / "scorer_review_report.md"),
+        "scorer_review_scores": str(light_dir / "scorer_review_scores.csv"),
+        "scorer_review_state": str(light_dir / "scorer_review_state.json"),
+        "scorer_review_parse_manifest": str(light_dir / "scorer_review_parse_manifest.json"),
     }
-    if args.resume_run_dir and _maybe_resume_stage(light_paths, ["agent_review_scores", "agent_review_state"]):
-        light_state = json.loads(Path(light_paths["agent_review_state"]).read_text(encoding="utf-8"))
+    if args.resume_run_dir and _maybe_resume_stage(light_paths, ["scorer_review_scores", "scorer_review_state"]):
+        light_state = json.loads(Path(light_paths["scorer_review_state"]).read_text(encoding="utf-8"))
         light = {"state": light_state, "paths": light_paths}
     else:
-        light = _run_light(args, heavy["paths"]["heavy_selected_top15"], light_dir, pre_hint, news_social_context=news_social["context"], openclaw_context=news_social.get("openclaw_context"))
+        light = _run_light(args, heavy["paths"]["selector_selected_top15"], light_dir, pre_hint, news_social_context=news_social["context"], openclaw_context=news_social.get("openclaw_context"))
 
     final_paths_guess = {
         "features": str(final_dir / f"live_features_{_fmt_date(args.trade_date)}_final_top{args.final_top_n}_pool{args.final_candidate_pool_size}.csv"),
@@ -531,8 +537,8 @@ def main() -> None:
             args.history_feature_table,
             top_n=args.final_top_n,
             candidate_pool_size=args.final_candidate_pool_size,
-            heavy_review_scores_path=heavy["paths"]["heavy_review_scores"],
-            light_review_scores_path=light["paths"]["agent_review_scores"],
+            selector_review_scores_path=heavy["paths"]["selector_review_scores"],
+            scorer_review_scores_path=light["paths"]["scorer_review_scores"],
             social_hot_features_path=news_social.get("social_hot_features_path"),
             theme_hot_features_path=news_social.get("theme_hot_features_path"),
             openclaw_features_path=news_social.get("openclaw_features_path"),
@@ -546,7 +552,7 @@ def main() -> None:
         )
         final_paths = _write_inference_outputs(final, final_dir, args.final_top_n, args.final_candidate_pool_size, "final")
 
-    manifest = {"trade_date": args.trade_date, "run_ts": run_ts, "resume_run_dir": args.resume_run_dir, "prefilter_snapshot_csv": args.prefilter_snapshot_csv, "final_snapshot_csv": final_snapshot, "prefilter_snapshot_time_hint": pre_hint, "final_snapshot_time_hint": final_hint, "weights": {"live_weight": args.live_weight, "heavy_weight": args.heavy_weight, "light_weight": args.light_weight}, "light_include_news_social_context": bool(args.light_include_news_social_context), "stages": {"recall": recall_paths, "minute_prefetch": minute_prefetch, "news_social": {"path": news_social["path"], "summary": news_social["summary"], "social_hot_features_path": news_social.get("social_hot_features_path"), "theme_hot_features_path": news_social.get("theme_hot_features_path"), "openclaw_features_path": news_social.get("openclaw_features_path"), "openclaw_context": news_social.get("openclaw_context")}, "ashare_enrichment": ashare_enrichment, "heavy": heavy, "light": light, "final": final_paths}, "rows": {"recall_candidate_pool": int(len(pd.read_csv(recall_paths["candidate_pool"]))), "heavy_selected_top15": int(len(pd.read_csv(heavy["paths"]["heavy_selected_top15"]))), "final_selected": int(len(pd.read_csv(final_paths["selected"])))}}
+    manifest = {"trade_date": args.trade_date, "run_ts": run_ts, "resume_run_dir": args.resume_run_dir, "prefilter_snapshot_csv": args.prefilter_snapshot_csv, "final_snapshot_csv": final_snapshot, "prefilter_snapshot_time_hint": pre_hint, "final_snapshot_time_hint": final_hint, "weights": {"live_weight": args.live_weight, "heavy_weight": args.heavy_weight, "light_weight": args.light_weight}, "scorer_include_news_social_context": bool(args.light_include_news_social_context), "stages": {"recall": recall_paths, "minute_prefetch": minute_prefetch, "news_social": {"path": news_social["path"], "summary": news_social["summary"], "social_hot_features_path": news_social.get("social_hot_features_path"), "theme_hot_features_path": news_social.get("theme_hot_features_path"), "openclaw_features_path": news_social.get("openclaw_features_path"), "openclaw_context": news_social.get("openclaw_context")}, "ashare_enrichment": ashare_enrichment, "selector": heavy, "scorer": light, "final": final_paths}, "rows": {"recall_candidate_pool": int(len(pd.read_csv(recall_paths["candidate_pool"]))), "selector_selected_top15": int(len(pd.read_csv(heavy["paths"]["selector_selected_top15"]))), "final_selected": int(len(pd.read_csv(final_paths["selected"])))}}
     manifest_path = run_dir / "multistage_manifest.json"
     manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2, default=str) + "\n", encoding="utf-8")
 
@@ -563,9 +569,9 @@ def main() -> None:
         print(f"OpenClaw features: {news_social['openclaw_features_path']}")
     if ashare_enrichment:
         print(f"A-share enrichment features: {ashare_enrichment['features_path']}")
-    print(f"Heavy scores: {heavy['paths']['heavy_review_scores']}")
-    print(f"Heavy Top15: {heavy['paths']['heavy_selected_top15']}")
-    print(f"Light scores: {light['paths']['agent_review_scores']}")
+    print(f"Selector scores: {heavy['paths']['selector_review_scores']}")
+    print(f"Selector Top15: {heavy['paths']['selector_selected_top15']}")
+    print(f"Scorer scores: {light['paths']['scorer_review_scores']}")
     print(f"Final selected: {final_paths['selected']}")
 
 

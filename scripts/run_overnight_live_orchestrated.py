@@ -337,8 +337,8 @@ def _run_final_fusion(book: RunBook, args: argparse.Namespace, final_snapshot: P
     if source_manifest:
         try:
             m = _read_json(source_manifest)
-            heavy_scores = (((m.get("stages") or {}).get("heavy") or {}).get("paths") or {}).get("heavy_review_scores")
-            light_scores = (((m.get("stages") or {}).get("light") or {}).get("paths") or {}).get("agent_review_scores")
+            heavy_scores = (((m.get("stages") or {}).get("selector") or {}).get("paths") or {}).get("selector_review_scores")
+            light_scores = (((m.get("stages") or {}).get("scorer") or {}).get("paths") or {}).get("scorer_review_scores")
             book.set_output("review_source_manifest", str(source_manifest))
         except Exception as exc:
             book.event("resolve_review_scores", "degraded", reason=str(exc))

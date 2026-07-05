@@ -1,0 +1,1300 @@
+{
+  "trade_date": "2026-06-29",
+  "candidate_top_k": 50,
+  "summary": {
+    "vendor": "akshare_global_keyword_fallback",
+    "degraded": true,
+    "degrade_reasons": [
+      "ticker_news_fetch_failed"
+    ],
+    "ticker_news_success_count": 10,
+    "ticker_news_failure_count": 46,
+    "global_news_success_count": 10,
+    "global_news_failure_count": 0,
+    "social_hot_success_count": 0,
+    "theme_hot_success_count": 11,
+    "social_hot_failure_count": 0,
+    "xueqiu_hot_success_count": 0,
+    "twitter_success_count": 0,
+    "failure_reason_counts": {
+      "RuntimeError": 46
+    },
+    "news_top10_count": 10,
+    "social_top10_count": 5,
+    "global_news_top10_count": 10,
+    "news_ticker_counts": {
+      "688256.SH": 1,
+      "603799.SH": 1,
+      "603833.SH": 1,
+      "000069.SZ": 1,
+      "605117.SH": 1,
+      "300274.SZ": 1,
+      "603993.SH": 1,
+      "002460.SZ": 1,
+      "601877.SH": 1,
+      "001979.SZ": 1
+    },
+    "social_ticker_counts": {
+      "601939.SH": 1,
+      "000301.SZ": 1,
+      "601607.SH": 2,
+      "300059.SZ": 1
+    },
+    "social_hot_summary": {
+      "enabled": false
+    },
+    "theme_hot_summary": {
+      "enabled": true,
+      "candidate_count": 50,
+      "matched_candidate_count": 11,
+      "theme_hit_total_count": 14,
+      "top_matches": [
+        {
+          "ts_code": "688256.SH",
+          "name": "寒武纪",
+          "industry": "半导体",
+          "theme_match_count": 4,
+          "theme_source_count": 1,
+          "theme_names": "AI/算力基础设施|AI/终端智能化",
+          "theme_bonus_score": 0.05
+        },
+        {
+          "ts_code": "000069.SZ",
+          "name": "华侨城Ａ",
+          "industry": "全国地产",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "消费/离境退税/出行",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "001979.SZ",
+          "name": "招商蛇口",
+          "industry": "全国地产",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "消费/离境退税/出行",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "002460.SZ",
+          "name": "赣锋锂业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "300274.SZ",
+          "name": "阳光电源",
+          "industry": "电气设备",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "600111.SH",
+          "name": "北方稀土",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "601877.SH",
+          "name": "正泰电器",
+          "industry": "电气设备",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603799.SH",
+          "name": "华友钴业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603833.SH",
+          "name": "欧派家居",
+          "industry": "家居用品",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "消费/离境退税/出行",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603993.SH",
+          "name": "洛阳钼业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        }
+      ]
+    },
+    "xueqiu_hot_summary": {
+      "enabled": false
+    },
+    "twitter_summary": {
+      "enabled": false
+    },
+    "notes": [
+      "ticker_news_fetch_failed:600188.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600886.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:688256.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600027.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600011.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600362.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000630.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000333.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601901.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600690.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000792.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_used_global_keyword_fallback",
+      "ticker_news_fetch_failed:300124.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601816.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000166.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600887.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:300122.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600018.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:603799.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:603833.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000069.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:605117.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000786.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601838.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601898.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000408.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601318.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:300274.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601336.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600919.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_used_global_keyword_fallback",
+      "ticker_news_fetch_failed:601059.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601881.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_used_global_keyword_fallback",
+      "ticker_news_fetch_failed:603993.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:603195.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_used_global_keyword_fallback",
+      "ticker_news_fetch_failed:002460.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600015.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600795.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601995.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000157.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601100.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601377.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601877.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:000983.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:001979.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600111.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:601390.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_fetch_failed:600019.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+      "ticker_news_proxy_recovered:11:688256.SH|603799.SH|603833.SH|000069.SZ|605117.SH|300274.SZ|603993.SH|002460.SZ|601877.SH|001979.SZ|600111.SH"
+    ]
+  },
+  "news_top10": [
+    {
+      "ticker": "688256.SH",
+      "title": "寒武纪 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 4 条，行业 半导体，主题 AI/算力基础设施|AI/终端智能化。 代表条目：工信部公开征求《航空后舱机载互联网通信 系统总体技术要求》等4项通信行业标准报批意见 | 高盛：美股或再迎强劲财报季 经济增长和AI热潮料推动每股收益增长 | 三星正式宣布2655万亿韩元的投资计划 涉及半导体、AI算力数据中心等",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.05,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 3,
+      "candidate_score": 0.7269753086419753
+    },
+    {
+      "ticker": "603799.SH",
+      "title": "华友钴业 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 小金属，主题 新能源/储能/锂电。 代表条目：融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 19,
+      "candidate_score": 0.667469135802469
+    },
+    {
+      "ticker": "603833.SH",
+      "title": "欧派家居 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 家居用品，主题 消费/离境退税/出行。 代表条目：暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 20,
+      "candidate_score": 0.6629320987654322
+    },
+    {
+      "ticker": "000069.SZ",
+      "title": "华侨城Ａ 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 全国地产，主题 消费/离境退税/出行。 代表条目：暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 21,
+      "candidate_score": 0.6618518518518519
+    },
+    {
+      "ticker": "605117.SH",
+      "title": "德业股份 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 电气设备，主题 新能源/储能/锂电。 代表条目：融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 22,
+      "candidate_score": 0.6597993827160495
+    },
+    {
+      "ticker": "300274.SZ",
+      "title": "阳光电源 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 电气设备，主题 新能源/储能/锂电。 代表条目：融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 28,
+      "candidate_score": 0.6463425925925925
+    },
+    {
+      "ticker": "603993.SH",
+      "title": "洛阳钼业 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 小金属，主题 新能源/储能/锂电。 代表条目：融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 35,
+      "candidate_score": 0.6338425925925926
+    },
+    {
+      "ticker": "002460.SZ",
+      "title": "赣锋锂业 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 小金属，主题 新能源/储能/锂电。 代表条目：融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 38,
+      "candidate_score": 0.6273765432098766
+    },
+    {
+      "ticker": "601877.SH",
+      "title": "正泰电器 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 电气设备，主题 新能源/储能/锂电。 代表条目：融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 45,
+      "candidate_score": 0.6201697530864199
+    },
+    {
+      "ticker": "001979.SZ",
+      "title": "招商蛇口 命中主题新闻映射",
+      "summary": "2026-06-29 theme_hot_context 命中 1 条，行业 全国地产，主题 消费/离境退税/出行。 代表条目：暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+      "source": "global_news+theme_mapping",
+      "link": "",
+      "published_at": "2026-06-29",
+      "sentiment": null,
+      "relevance": 0.03,
+      "channel": "news_proxy_theme_hot",
+      "rank_in_pool": 47,
+      "candidate_score": 0.6183796296296297
+    }
+  ],
+  "social_sentiment_top10": [
+    {
+      "ticker": "601939.SH",
+      "title": "韩国总统府：可能提前推进核电站建设以配合国内新芯片集群项目",
+      "summary": "Date: 2026-06-29 15:46:01 【韩国总统府：可能提前推进核电站建设以配合国内新芯片集群项目】韩国总统府表示，可能提前推进核电站建设，以配合国内新芯片集群项目，目标在现政府任内完成西南地区芯片集群建设。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786614271.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "rank_in_pool": 12,
+      "candidate_score": 0.6791512345679012,
+      "social_rank": 1
+    },
+    {
+      "ticker": "000301.SZ",
+      "title": "京东方Ａ成交额达300亿元",
+      "summary": "Date: 2026-06-29 14:48:57 京东方Ａ成交额达300亿元，现涨0.39%。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786562663.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "rank_in_pool": 31,
+      "candidate_score": 0.6396296296296297,
+      "social_rank": 2
+    },
+    {
+      "ticker": "601607.SH",
+      "title": "上海医药：氨己烯酸口服溶液用散获批准生产",
+      "summary": "Date: 2026-06-29 15:37:55 【上海医药：氨己烯酸口服溶液用散获批准生产】上海医药(601607.SH)公告称，公司下属上药信谊收到国家药监局颁发的氨己烯酸口服溶液用散《药品注册证书》，该药品获得批准生产。氨己烯酸口服溶液用散用于治疗婴儿痉挛症，为化学药品3类。截至公告日，公司已投入研发费用约368.3万元。该药品获批有利于扩大市场份额，提升竞争力。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786606311.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "rank_in_pool": 34,
+      "candidate_score": 0.6373302469135802,
+      "social_rank": 3
+    },
+    {
+      "ticker": "601607.SH",
+      "title": "原上海贵酒母公司正式退市 退市岩石后续之路怎么走？",
+      "summary": "Date: 2026-06-29 14:53:00 【原上海贵酒母公司正式退市 退市岩石后续之路怎么走？】6月29日，原上海贵酒母公司正式告别主板舞台。在经历半年多的博弈后，退市岩石仍逃不过被强制退市的命运。而退市整理期结束并不意味着风波的平息。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786556859.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "rank_in_pool": 34,
+      "candidate_score": 0.6373302469135802,
+      "social_rank": 4
+    },
+    {
+      "ticker": "300059.SZ",
+      "title": "京东方Ａ成交额达300亿元",
+      "summary": "Date: 2026-06-29 14:48:57 京东方Ａ成交额达300亿元，现涨0.39%。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786562663.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "rank_in_pool": 37,
+      "candidate_score": 0.6277932098765432,
+      "social_rank": 5
+    }
+  ],
+  "global_news_top10": [
+    {
+      "ticker": "GLOBAL",
+      "title": "物产环能：副董事长王晓光离任",
+      "summary": "Date: 2026-06-29 15:48:14 【物产环能：副董事长王晓光离任】物产环能公告，因工作岗位调整原因王晓光辞去公司副董事长、董事职务。王晓光的辞职不会影响公司日常经营。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786614631.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 1
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+      "summary": "Date: 2026-06-29 15:46:43 【融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议】融和元储表示，将积极响应，坚持依法合规、诚信履约的原则，持续优化采购与结算管理机制。同时，以更加开放、稳定、可持续的合作方式，与产业链上下游企业共同构建公平、高效、共赢的供应链生态，助力产业高质量发展。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786614728.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 2
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+      "summary": "Date: 2026-06-29 15:46:37 【暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放】临近7月，暑期旅游旺季即将全面开启，夏季旅游预订市场提前升温。在线旅游平台预订数据显示，今年暑期第一波出游热潮已经开启，出游高峰期将贯穿整个7月，并持续至8月中下旬，长线出游需求集中释放。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786614369.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 3
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "韩国总统府：可能提前推进核电站建设以配合国内新芯片集群项目",
+      "summary": "Date: 2026-06-29 15:46:01 【韩国总统府：可能提前推进核电站建设以配合国内新芯片集群项目】韩国总统府表示，可能提前推进核电站建设，以配合国内新芯片集群项目，目标在现政府任内完成西南地区芯片集群建设。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786614271.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 4
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "工信部公开征求《航空后舱机载互联网通信 系统总体技术要求》等4项通信行业标准报批意见",
+      "summary": "Date: 2026-06-29 15:42:18 工信部公开征求《航空后舱机载互联网通信系统总体技术要求》等4项通信行业标准报批意见。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786611214.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 5
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "金宏气体：超纯氨等产品已稳定供应海力士",
+      "summary": "Date: 2026-06-29 15:41:24 【金宏气体：超纯氨等产品已稳定供应海力士】金宏气体在互动平台表示，公司持续深耕电子特种气体产业化布局，超纯氨、高纯氧化亚氮、高纯二氧化碳产品已经稳定供应海力士。后续公司仍将持续开拓下游市场、拓展应用场景，不断挖掘新的增长潜力。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786611871.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 6
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "高盛：美股或再迎强劲财报季 经济增长和AI热潮料推动每股收益增长",
+      "summary": "Date: 2026-06-29 15:39:38 【高盛：美股或再迎强劲财报季 经济增长和AI热潮料推动每股收益增长】高盛策略师表示，在“稳健的宏观背景”和人工智能投资热潮推动下，美国股市可能迎来又一个强劲的财报季。Ben Snider领导的团队表示，标普500指数盈利趋势强劲，足以超过分析师此前的高预期。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786613180.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 7
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "三星正式宣布2655万亿韩元的投资计划 涉及半导体、AI算力数据中心等",
+      "summary": "Date: 2026-06-29 15:37:56 【三星正式宣布2655万亿韩元的投资计划 涉及半导体、AI算力数据中心等】三星正式宣布投资计划，总额达2,655万亿韩元（约合11.68万亿元人民币），将在韩国龙仁市和平泽市的半导体产业集群投资2030万亿韩元。此前韩国方面称，三星集团和SK海力士将宣布未来10年总额达2000万亿韩元（约合8.8万亿元人民币）的重大投资计划，重点布局半导体、AI算力数据中心与物理AI领域。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786605050.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 8
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "上海医药：氨己烯酸口服溶液用散获批准生产",
+      "summary": "Date: 2026-06-29 15:37:55 【上海医药：氨己烯酸口服溶液用散获批准生产】上海医药(601607.SH)公告称，公司下属上药信谊收到国家药监局颁发的氨己烯酸口服溶液用散《药品注册证书》，该药品获得批准生产。氨己烯酸口服溶液用散用于治疗婴儿痉挛症，为化学药品3类。截至公告日，公司已投入研发费用约368.3万元。该药品获批有利于扩大市场份额，提升竞争力。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786606311.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 9
+    },
+    {
+      "ticker": "GLOBAL",
+      "title": "高盛：铜或将从伊美冲突中受益",
+      "summary": "Date: 2026-06-29 15:35:34 【高盛：铜或将从伊美冲突中受益】高盛集团表示，包括铜在内的金属可能从伊美战争的遗留影响中受益，因为这场冲突支持了推动需求的一些趋势，包括电气化和国防开支。",
+      "source": "",
+      "link": "https://finance.eastmoney.com/a/202606293786605158.html",
+      "published_at": "",
+      "sentiment": null,
+      "relevance": null,
+      "channel": "news",
+      "global_rank": 10
+    }
+  ],
+  "social_hot_context": {
+    "summary": {
+      "enabled": false
+    },
+    "features": []
+  },
+  "theme_hot_context": {
+    "summary": {
+      "enabled": true,
+      "candidate_count": 50,
+      "matched_candidate_count": 11,
+      "theme_hit_total_count": 14,
+      "top_matches": [
+        {
+          "ts_code": "688256.SH",
+          "name": "寒武纪",
+          "industry": "半导体",
+          "theme_match_count": 4,
+          "theme_source_count": 1,
+          "theme_names": "AI/算力基础设施|AI/终端智能化",
+          "theme_bonus_score": 0.05
+        },
+        {
+          "ts_code": "000069.SZ",
+          "name": "华侨城Ａ",
+          "industry": "全国地产",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "消费/离境退税/出行",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "001979.SZ",
+          "name": "招商蛇口",
+          "industry": "全国地产",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "消费/离境退税/出行",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "002460.SZ",
+          "name": "赣锋锂业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "300274.SZ",
+          "name": "阳光电源",
+          "industry": "电气设备",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "600111.SH",
+          "name": "北方稀土",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "601877.SH",
+          "name": "正泰电器",
+          "industry": "电气设备",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603799.SH",
+          "name": "华友钴业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603833.SH",
+          "name": "欧派家居",
+          "industry": "家居用品",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "消费/离境退税/出行",
+          "theme_bonus_score": 0.03
+        },
+        {
+          "ts_code": "603993.SH",
+          "name": "洛阳钼业",
+          "industry": "小金属",
+          "theme_match_count": 1,
+          "theme_source_count": 1,
+          "theme_names": "新能源/储能/锂电",
+          "theme_bonus_score": 0.03
+        }
+      ]
+    },
+    "features": [
+      {
+        "ts_code": "688256.SH",
+        "name": "寒武纪",
+        "industry": "半导体",
+        "theme_match_count": 4,
+        "theme_source_count": 1,
+        "theme_names": "AI/算力基础设施|AI/终端智能化",
+        "theme_bonus_score": 0.05,
+        "matched_theme_items": [
+          {
+            "theme": "ai_infra",
+            "theme_label": "AI/算力基础设施",
+            "matched_keywords": [
+              "通信"
+            ],
+            "title": "工信部公开征求《航空后舱机载互联网通信 系统总体技术要求》等4项通信行业标准报批意见",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          },
+          {
+            "theme": "ai_terminal",
+            "theme_label": "AI/终端智能化",
+            "matched_keywords": [
+              "人工智能",
+              "ai"
+            ],
+            "title": "高盛：美股或再迎强劲财报季 经济增长和AI热潮料推动每股收益增长",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          },
+          {
+            "theme": "ai_terminal",
+            "theme_label": "AI/终端智能化",
+            "matched_keywords": [
+              "ai",
+              "算力"
+            ],
+            "title": "三星正式宣布2655万亿韩元的投资计划 涉及半导体、AI算力数据中心等",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          },
+          {
+            "theme": "ai_infra",
+            "theme_label": "AI/算力基础设施",
+            "matched_keywords": [
+              "算力"
+            ],
+            "title": "三星正式宣布2655万亿韩元的投资计划 涉及半导体、AI算力数据中心等",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "000069.SZ",
+        "name": "华侨城Ａ",
+        "industry": "全国地产",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "消费/离境退税/出行",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "consumer_travel",
+            "theme_label": "消费/离境退税/出行",
+            "matched_keywords": [
+              "旅游"
+            ],
+            "title": "暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+            "source_kind": "news",
+            "match_reason": "industry_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "001979.SZ",
+        "name": "招商蛇口",
+        "industry": "全国地产",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "消费/离境退税/出行",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "consumer_travel",
+            "theme_label": "消费/离境退税/出行",
+            "matched_keywords": [
+              "旅游"
+            ],
+            "title": "暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "002460.SZ",
+        "name": "赣锋锂业",
+        "industry": "小金属",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "300274.SZ",
+        "name": "阳光电源",
+        "industry": "电气设备",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "600111.SH",
+        "name": "北方稀土",
+        "industry": "小金属",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "industry_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "601877.SH",
+        "name": "正泰电器",
+        "industry": "电气设备",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "603799.SH",
+        "name": "华友钴业",
+        "industry": "小金属",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "industry_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "603833.SH",
+        "name": "欧派家居",
+        "industry": "家居用品",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "消费/离境退税/出行",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "consumer_travel",
+            "theme_label": "消费/离境退税/出行",
+            "matched_keywords": [
+              "旅游"
+            ],
+            "title": "暑期旅游旺季即将全面开启 深度游、体验游等长线出游需求集中释放",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "603993.SH",
+        "name": "洛阳钼业",
+        "industry": "小金属",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "industry_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "605117.SH",
+        "name": "德业股份",
+        "industry": "电气设备",
+        "theme_match_count": 1,
+        "theme_source_count": 1,
+        "theme_names": "新能源/储能/锂电",
+        "theme_bonus_score": 0.03,
+        "matched_theme_items": [
+          {
+            "theme": "new_energy",
+            "theme_label": "新能源/储能/锂电",
+            "matched_keywords": [
+              "储能",
+              "电池"
+            ],
+            "title": "融和元储：积极响应动力和储能电池企业供应商账款支付规范倡议",
+            "source_kind": "news",
+            "match_reason": "ticker_hint"
+          }
+        ]
+      },
+      {
+        "ts_code": "000157.SZ",
+        "name": "中联重科",
+        "industry": "工程机械",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000166.SZ",
+        "name": "申万宏源",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000301.SZ",
+        "name": "东方盛虹",
+        "industry": "化纤",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000333.SZ",
+        "name": "美的集团",
+        "industry": "家用电器",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000408.SZ",
+        "name": "藏格矿业",
+        "industry": "农药化肥",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000630.SZ",
+        "name": "铜陵有色",
+        "industry": "铜",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000786.SZ",
+        "name": "北新建材",
+        "industry": "其他建材",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000792.SZ",
+        "name": "盐湖股份",
+        "industry": "农药化肥",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "000983.SZ",
+        "name": "山西焦煤",
+        "industry": "煤炭开采",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "300059.SZ",
+        "name": "东方财富",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "300122.SZ",
+        "name": "智飞生物",
+        "industry": "生物制药",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "300124.SZ",
+        "name": "汇川技术",
+        "industry": "电器仪表",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600011.SH",
+        "name": "华能国际",
+        "industry": "火力发电",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600015.SH",
+        "name": "华夏银行",
+        "industry": "银行",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600018.SH",
+        "name": "上港集团",
+        "industry": "港口",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600019.SH",
+        "name": "宝钢股份",
+        "industry": "普钢",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600027.SH",
+        "name": "华电国际",
+        "industry": "火力发电",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600188.SH",
+        "name": "兖矿能源",
+        "industry": "煤炭开采",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600362.SH",
+        "name": "江西铜业",
+        "industry": "铜",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600690.SH",
+        "name": "海尔智家",
+        "industry": "家用电器",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600795.SH",
+        "name": "国电电力",
+        "industry": "火力发电",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600886.SH",
+        "name": "国投电力",
+        "industry": "水力发电",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600887.SH",
+        "name": "伊利股份",
+        "industry": "乳制品",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "600919.SH",
+        "name": "江苏银行",
+        "industry": "银行",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601059.SH",
+        "name": "信达证券",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601100.SH",
+        "name": "恒立液压",
+        "industry": "工程机械",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601318.SH",
+        "name": "中国平安",
+        "industry": "保险",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601336.SH",
+        "name": "新华保险",
+        "industry": "保险",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601377.SH",
+        "name": "兴业证券",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601390.SH",
+        "name": "中国中铁",
+        "industry": "建筑工程",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601607.SH",
+        "name": "上海医药",
+        "industry": "医药商业",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601816.SH",
+        "name": "京沪高铁",
+        "industry": "铁路",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601838.SH",
+        "name": "成都银行",
+        "industry": "银行",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601881.SH",
+        "name": "中国银河",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601898.SH",
+        "name": "中煤能源",
+        "industry": "煤炭开采",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601901.SH",
+        "name": "方正证券",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601939.SH",
+        "name": "建设银行",
+        "industry": "银行",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "601995.SH",
+        "name": "中金公司",
+        "industry": "证券",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      },
+      {
+        "ts_code": "603195.SH",
+        "name": "公牛集团",
+        "industry": "家用电器",
+        "theme_match_count": 0,
+        "theme_source_count": 0,
+        "theme_names": "",
+        "theme_bonus_score": 0.0,
+        "matched_theme_items": []
+      }
+    ]
+  },
+  "openclaw_context": null,
+  "elapsed_seconds": 73.491
+}

@@ -300,13 +300,13 @@ def _boolish_series(series: pd.Series) -> pd.Series:
     return series.astype(str).str.lower().isin(["true", "1", "yes"])
 
 
-def _load_light_review_scores(review_scores_path: str | Path) -> pd.DataFrame:
+def _load_scorer_review_scores(review_scores_path: str | Path) -> pd.DataFrame:
     review_path = Path(review_scores_path)
     if not review_path.exists():
-        raise FileNotFoundError(f"Agent review scores not found: {review_path}")
+        raise FileNotFoundError(f"Scorer review scores not found: {review_path}")
     review = pd.read_csv(review_path)
     if "ts_code" not in review.columns:
-        raise ValueError(f"Agent review scores missing ts_code: {review_path}")
+        raise ValueError(f"Scorer review scores missing ts_code: {review_path}")
     for col, default in [
         ("agent_score", 0.5),
         ("agent_adjustment", 0.0),
@@ -323,13 +323,13 @@ def _load_light_review_scores(review_scores_path: str | Path) -> pd.DataFrame:
     return review
 
 
-def _load_heavy_review_scores(heavy_review_scores_path: str | Path) -> pd.DataFrame:
-    review_path = Path(heavy_review_scores_path)
+def _load_selector_review_scores(selector_review_scores_path: str | Path) -> pd.DataFrame:
+    review_path = Path(selector_review_scores_path)
     if not review_path.exists():
-        raise FileNotFoundError(f"Heavy review scores not found: {review_path}")
+        raise FileNotFoundError(f"Selector review scores not found: {review_path}")
     review = pd.read_csv(review_path)
     if "ts_code" not in review.columns:
-        raise ValueError(f"Heavy review scores missing ts_code: {review_path}")
+        raise ValueError(f"Selector review scores missing ts_code: {review_path}")
     for col, default in [
         ("heavy_score", 0.5),
         ("heavy_tier", "watch"),
@@ -459,7 +459,7 @@ def _load_openclaw_features(openclaw_features_path: str | Path) -> pd.DataFrame:
     return feat
 
 
-def apply_agent_review_fusion(
+def apply_scorer_review_fusion(
     scored: pd.DataFrame,
     review_scores_path: str | Path | None = None,
     live_weight: float = 0.75,
@@ -491,7 +491,7 @@ def apply_agent_review_fusion(
         out["rank_in_live_day"] = out["rank_in_final_live_day"]
         return out.sort_values(["rank_in_live_day", "ts_code"]).reset_index(drop=True)
 
-    review = _load_light_review_scores(review_scores_path)
+    review = _load_scorer_review_scores(review_scores_path)
 
     out = out.merge(review, on="ts_code", how="left", suffixes=("", "_review"))
     for col in ["agent_score", "agent_adjustment", "agent_veto", "agent_risk_level", "agent_reason"]:
@@ -604,8 +604,8 @@ def _load_twitter_features(twitter_features_path):
 
 def apply_multi_stage_review_fusion(
     scored: pd.DataFrame,
-    heavy_review_scores_path: str | Path | None = None,
-    light_review_scores_path: str | Path | None = None,
+    selector_review_scores_path: str | Path | None = None,
+    scorer_review_scores_path: str | Path | None = None,
     social_hot_features_path: str | Path | None = None,
     theme_hot_features_path: str | Path | None = None,
     openclaw_features_path: str | Path | None = None,
@@ -617,12 +617,11 @@ def apply_multi_stage_review_fusion(
     heavy_weight: float = 0.25,
     light_weight: float = 0.15,
 ) -> pd.DataFrame:
-    """Fuse deterministic live score with heavy Top50 review and light Top15 review.
+    """Fuse deterministic live score with selector Top50 review and scorer Top15 review.
 
-    Heavy review is the earlier Top50 -> Top15 research stage.  Light review is
+    Selector review is the earlier Top50 -> Top15 research stage.  Scorer review is
     the later fast pre-close stage.  Either input may be absent; missing per-row
-    scores fall back to neutral values.
-    """
+    scores fall back to neutral values."""
     out = scored.copy()
     out["final_live_score"] = out["overnight_live_score"]
 
@@ -666,20 +665,20 @@ def apply_multi_stage_review_fusion(
     ]:
         out[col] = default
 
-    if heavy_review_scores_path:
-        heavy = _load_heavy_review_scores(heavy_review_scores_path)
-        out = out.merge(heavy, on="ts_code", how="left", suffixes=("", "_heavy_review"))
+    if selector_review_scores_path:
+        heavy = _load_selector_review_scores(selector_review_scores_path)
+        out = out.merge(heavy, on="ts_code", how="left", suffixes=("", "_selector_review"))
         for col in ["heavy_score", "heavy_tier", "heavy_veto", "heavy_adjustment", "heavy_keep_rank", "heavy_reason", "heavy_risk_flags"]:
-            review_col = f"{col}_heavy_review"
+            review_col = f"{col}_selector_review"
             if review_col in out.columns:
                 out[col] = out[review_col].combine_first(out[col])
                 out = out.drop(columns=[review_col])
 
-    if light_review_scores_path:
-        light = _load_light_review_scores(light_review_scores_path)
-        out = out.merge(light, on="ts_code", how="left", suffixes=("", "_light_review"))
+    if scorer_review_scores_path:
+        light = _load_scorer_review_scores(scorer_review_scores_path)
+        out = out.merge(light, on="ts_code", how="left", suffixes=("", "_scorer_review"))
         for col in ["agent_score", "agent_adjustment", "agent_veto", "agent_risk_level", "agent_reason"]:
-            review_col = f"{col}_light_review"
+            review_col = f"{col}_scorer_review"
             if review_col in out.columns:
                 out[col] = out[review_col].combine_first(out[col])
                 out = out.drop(columns=[review_col])
@@ -842,8 +841,8 @@ def run_live_inference(
     top_n: int = 5,
     candidate_pool_size: int = 20,
     review_scores_path: str | Path | None = None,
-    heavy_review_scores_path: str | Path | None = None,
-    light_review_scores_path: str | Path | None = None,
+    selector_review_scores_path: str | Path | None = None,
+    scorer_review_scores_path: str | Path | None = None,
     social_hot_features_path: str | Path | None = None,
     theme_hot_features_path: str | Path | None = None,
     openclaw_features_path: str | Path | None = None,
@@ -867,11 +866,11 @@ def run_live_inference(
     features = build_live_feature_frame(snapshot, latest, trade_date=trade_date)
     scored = score_live_candidates(features)
     scored = apply_live_risk_filters(scored, cfg)
-    if heavy_review_scores_path or light_review_scores_path:
+    if selector_review_scores_path or scorer_review_scores_path:
         scored = apply_multi_stage_review_fusion(
             scored,
-            heavy_review_scores_path=heavy_review_scores_path,
-            light_review_scores_path=light_review_scores_path,
+            selector_review_scores_path=selector_review_scores_path,
+            scorer_review_scores_path=scorer_review_scores_path,
             social_hot_features_path=social_hot_features_path,
             theme_hot_features_path=theme_hot_features_path,
             openclaw_features_path=openclaw_features_path,
@@ -884,7 +883,7 @@ def run_live_inference(
             light_weight=light_weight,
         )
     else:
-        scored = apply_agent_review_fusion(
+        scored = apply_scorer_review_fusion(
             scored,
             review_scores_path=review_scores_path,
             live_weight=live_weight,

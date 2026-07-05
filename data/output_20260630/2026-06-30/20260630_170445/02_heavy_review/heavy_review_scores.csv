@@ -1,0 +1,51 @@
+ts_code,heavy_score,heavy_tier,heavy_veto,heavy_adjustment,heavy_keep_rank,heavy_reason,heavy_risk_flags
+600886.SH,0.5,watch,False,0.0,100.0,default_watch_unmentioned,[]
+000301.SZ,0.76,core,False,0.04,2.0,高overnight得分，日内居高,"[""化纤行业孤例"", ""历史隔夜波动""]"
+688256.SH,0.5,watch,False,0.0,101.0,default_watch_unmentioned,[]
+000630.SZ,0.72,core,False,0.01,5.0,铜板块领先，微跌但尾盘稳,"[""期铜联动风险"", ""隔夜正率0.2""]"
+300059.SZ,0.74,core,False,0.04,3.0,证券龙头，量价配合良好,"[""证券板块过载"", ""创业板弹性大""]"
+603833.SH,0.5,watch,False,0.0,102.0,default_watch_unmentioned,[]
+603799.SH,0.71,core,False,0.01,6.0,小金属+主题，正隔夜率高,"[""新能源回调风险"", ""正率样本短""]"
+300274.SZ,0.78,core,False,0.07,1.0,双主题映射，日内强正收益,"[""电气设备集中"", ""隔夜正率较低""]"
+605499.SH,0.73,core,False,0.03,4.0,软饮料独苗，稳健上行,"[""无主题催化"", ""流动性一般""]"
+600362.SH,0.5,watch,False,0.0,103.0,default_watch_unmentioned,[]
+601901.SH,0.5,watch,False,0.0,104.0,default_watch_unmentioned,[]
+600690.SH,0.66,core,False,0.01,10.0,家电稳盘，量价均衡,"[""无主题催化"", ""隔夜正率0.2""]"
+002180.SZ,0.69,core,False,-0.01,7.0,双AI/机器人主题映射,"[""尾盘回落幅度"", ""隔夜正率低""]"
+000786.SZ,0.5,watch,False,0.0,105.0,default_watch_unmentioned,[]
+601995.SH,0.5,watch,False,0.0,106.0,default_watch_unmentioned,[]
+600188.SH,0.5,watch,False,0.0,107.0,default_watch_unmentioned,[]
+000792.SZ,0.68,core,False,0.0,8.0,农药化肥优选，日内偏强,"[""周期股波动"", ""隔夜正率0.2""]"
+300124.SZ,0.65,core,False,0.02,11.0,电器仪表，正隔夜率0.4,"[""无主题映射"", ""创业板波动""]"
+601881.SH,0.5,watch,False,0.0,108.0,default_watch_unmentioned,[]
+000408.SZ,0.5,watch,False,0.0,109.0,default_watch_unmentioned,[]
+600027.SH,0.5,watch,False,0.0,110.0,default_watch_unmentioned,[]
+601377.SH,0.5,watch,False,0.0,111.0,default_watch_unmentioned,[]
+601689.SH,0.5,watch,False,0.0,112.0,default_watch_unmentioned,[]
+605117.SH,0.67,core,False,0.02,9.0,双主题新能源+机器人,"[""日内高点回探"", ""隔夜正率偏低""]"
+601939.SH,0.5,watch,False,0.0,113.0,default_watch_unmentioned,[]
+601336.SH,0.5,watch,False,0.0,114.0,default_watch_unmentioned,[]
+000596.SZ,0.61,core,False,0.0,15.0,白酒补位，日内偏稳,"[""无主题催化"", ""隔夜正率一般""]"
+603195.SH,0.5,watch,False,0.0,115.0,default_watch_unmentioned,[]
+601059.SH,0.5,watch,False,0.0,116.0,default_watch_unmentioned,[]
+000063.SZ,0.5,watch,False,0.0,117.0,default_watch_unmentioned,[]
+600030.SH,0.5,watch,False,0.0,118.0,default_watch_unmentioned,[]
+300142.SZ,0.5,watch,False,0.0,119.0,default_watch_unmentioned,[]
+002415.SZ,0.5,watch,False,0.0,120.0,default_watch_unmentioned,[]
+000069.SZ,0.05,reject,True,-0.15,999.0,最低价不达标，过滤失败,"[""低价股"", ""流动性差""]"
+001979.SZ,0.5,watch,False,0.0,121.0,default_watch_unmentioned,[]
+002050.SZ,0.5,watch,False,0.0,122.0,default_watch_unmentioned,[]
+000333.SZ,0.5,watch,False,0.0,123.0,default_watch_unmentioned,[]
+603260.SH,0.63,core,False,0.01,13.0,正隔夜率高，主题匹配,"[""高弹性回撤"", ""锂电事件干扰""]"
+600010.SH,0.1,reject,True,-0.1,999.0,最低价不达标，过滤失败,"[""低价股"", ""隔夜全负""]"
+600011.SH,0.5,watch,False,0.0,124.0,default_watch_unmentioned,[]
+600111.SH,0.5,watch,False,0.0,125.0,default_watch_unmentioned,[]
+600674.SH,0.64,core,False,0.02,12.0,高正隔夜率，尾盘稳定,"[""水力发电防御属性"", ""整体低位""]"
+601838.SH,0.5,watch,False,0.0,126.0,default_watch_unmentioned,[]
+600809.SH,0.5,watch,False,0.0,127.0,default_watch_unmentioned,[]
+601878.SH,0.5,watch,False,0.0,128.0,default_watch_unmentioned,[]
+601888.SH,0.5,watch,False,0.0,129.0,default_watch_unmentioned,[]
+601100.SH,0.62,core,False,0.01,14.0,机器人主题+高正隔夜率,"[""离日高较远"", ""工程机械单一""]"
+601899.SH,0.5,watch,False,0.0,130.0,default_watch_unmentioned,[]
+000166.SZ,0.5,watch,False,0.0,131.0,default_watch_unmentioned,[]
+300496.SZ,0.5,watch,False,0.0,132.0,default_watch_unmentioned,[]

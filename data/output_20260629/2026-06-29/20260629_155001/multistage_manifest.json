@@ -1,0 +1,584 @@
+{
+  "trade_date": "2026-06-29",
+  "run_ts": "20260629_155001",
+  "resume_run_dir": null,
+  "prefilter_snapshot_csv": "data/snapshots/snapshot_20260629_tencent.csv",
+  "final_snapshot_csv": "data/snapshots/snapshot_20260629_tencent.csv",
+  "prefilter_snapshot_time_hint": "15:47:58",
+  "final_snapshot_time_hint": "15:47:58",
+  "weights": {
+    "live_weight": 0.6,
+    "heavy_weight": 0.25,
+    "light_weight": 0.15
+  },
+  "light_include_news_social_context": false,
+  "stages": {
+    "recall": {
+      "features": "data/output_20260629/2026-06-29/20260629_155001/01_recall_top50/live_features_20260629_recall_top50_pool50.csv",
+      "scored": "data/output_20260629/2026-06-29/20260629_155001/01_recall_top50/live_scored_20260629_recall_top50_pool50.csv",
+      "candidate_pool": "data/output_20260629/2026-06-29/20260629_155001/01_recall_top50/live_candidate_pool_20260629_recall_top50_pool50.csv",
+      "selected": "data/output_20260629/2026-06-29/20260629_155001/01_recall_top50/live_selected_20260629_recall_top50_pool50.csv",
+      "summary": "data/output_20260629/2026-06-29/20260629_155001/01_recall_top50/live_summary_20260629_recall_top50_pool50.md"
+    },
+    "minute_prefetch": null,
+    "news_social": {
+      "path": "data/output_20260629/2026-06-29/20260629_155001/01c_news_social_top10/news_social_context.json",
+      "summary": {
+        "vendor": "akshare_global_keyword_fallback",
+        "degraded": true,
+        "degrade_reasons": [
+          "ticker_news_fetch_failed"
+        ],
+        "ticker_news_success_count": 10,
+        "ticker_news_failure_count": 46,
+        "global_news_success_count": 10,
+        "global_news_failure_count": 0,
+        "social_hot_success_count": 0,
+        "theme_hot_success_count": 11,
+        "social_hot_failure_count": 0,
+        "xueqiu_hot_success_count": 0,
+        "twitter_success_count": 0,
+        "failure_reason_counts": {
+          "RuntimeError": 46
+        },
+        "news_top10_count": 10,
+        "social_top10_count": 5,
+        "global_news_top10_count": 10,
+        "news_ticker_counts": {
+          "688256.SH": 1,
+          "603799.SH": 1,
+          "603833.SH": 1,
+          "000069.SZ": 1,
+          "605117.SH": 1,
+          "300274.SZ": 1,
+          "603993.SH": 1,
+          "002460.SZ": 1,
+          "601877.SH": 1,
+          "001979.SZ": 1
+        },
+        "social_ticker_counts": {
+          "601939.SH": 1,
+          "000301.SZ": 1,
+          "601607.SH": 2,
+          "300059.SZ": 1
+        },
+        "social_hot_summary": {
+          "enabled": false
+        },
+        "theme_hot_summary": {
+          "enabled": true,
+          "candidate_count": 50,
+          "matched_candidate_count": 11,
+          "theme_hit_total_count": 14,
+          "top_matches": [
+            {
+              "ts_code": "688256.SH",
+              "name": "寒武纪",
+              "industry": "半导体",
+              "theme_match_count": 4,
+              "theme_source_count": 1,
+              "theme_names": "AI/算力基础设施|AI/终端智能化",
+              "theme_bonus_score": 0.05
+            },
+            {
+              "ts_code": "000069.SZ",
+              "name": "华侨城Ａ",
+              "industry": "全国地产",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "消费/离境退税/出行",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "001979.SZ",
+              "name": "招商蛇口",
+              "industry": "全国地产",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "消费/离境退税/出行",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "002460.SZ",
+              "name": "赣锋锂业",
+              "industry": "小金属",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "新能源/储能/锂电",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "300274.SZ",
+              "name": "阳光电源",
+              "industry": "电气设备",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "新能源/储能/锂电",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "600111.SH",
+              "name": "北方稀土",
+              "industry": "小金属",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "新能源/储能/锂电",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "601877.SH",
+              "name": "正泰电器",
+              "industry": "电气设备",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "新能源/储能/锂电",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "603799.SH",
+              "name": "华友钴业",
+              "industry": "小金属",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "新能源/储能/锂电",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "603833.SH",
+              "name": "欧派家居",
+              "industry": "家居用品",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "消费/离境退税/出行",
+              "theme_bonus_score": 0.03
+            },
+            {
+              "ts_code": "603993.SH",
+              "name": "洛阳钼业",
+              "industry": "小金属",
+              "theme_match_count": 1,
+              "theme_source_count": 1,
+              "theme_names": "新能源/储能/锂电",
+              "theme_bonus_score": 0.03
+            }
+          ]
+        },
+        "xueqiu_hot_summary": {
+          "enabled": false
+        },
+        "twitter_summary": {
+          "enabled": false
+        },
+        "notes": [
+          "ticker_news_fetch_failed:600188.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600886.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:688256.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600027.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600011.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600362.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000630.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000333.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601901.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600690.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000792.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_used_global_keyword_fallback",
+          "ticker_news_fetch_failed:300124.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601816.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000166.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600887.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:300122.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600018.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:603799.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:603833.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000069.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:605117.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000786.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601838.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601898.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000408.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601318.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:300274.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601336.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600919.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_used_global_keyword_fallback",
+          "ticker_news_fetch_failed:601059.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601881.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_used_global_keyword_fallback",
+          "ticker_news_fetch_failed:603993.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:603195.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_used_global_keyword_fallback",
+          "ticker_news_fetch_failed:002460.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600015.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600795.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601995.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000157.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601100.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601377.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601877.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:000983.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:001979.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600111.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:601390.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_fetch_failed:600019.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+          "ticker_news_proxy_recovered:11:688256.SH|603799.SH|603833.SH|000069.SZ|605117.SH|300274.SZ|603993.SH|002460.SZ|601877.SH|001979.SZ|600111.SH"
+        ]
+      },
+      "social_hot_features_path": "data/output_20260629/2026-06-29/20260629_155001/01c_news_social_top10/social_hot_features.csv",
+      "theme_hot_features_path": "data/output_20260629/2026-06-29/20260629_155001/01c_news_social_top10/theme_hot_features.csv",
+      "openclaw_features_path": null,
+      "openclaw_context": null
+    },
+    "ashare_enrichment": null,
+    "heavy": {
+      "state": {
+        "mode": "heavy_top50_to_top15_review",
+        "trade_date": "2026-06-29",
+        "llm": "yuanlan4:deepthink",
+        "candidate_count": 50,
+        "target_top_n": 15,
+        "snapshot_time_hint": "15:47:58",
+        "summary": {
+          "candidate_count": 50,
+          "source": "live_preclose_buffer",
+          "industry_counts": {
+            "证券": 7,
+            "银行": 4,
+            "小金属": 4,
+            "煤炭开采": 3,
+            "火力发电": 3,
+            "家用电器": 3,
+            "电气设备": 3,
+            "铜": 2,
+            "农药化肥": 2,
+            "全国地产": 2,
+            "保险": 2,
+            "工程机械": 2,
+            "水力发电": 1,
+            "半导体": 1,
+            "电器仪表": 1,
+            "铁路": 1,
+            "乳制品": 1,
+            "生物制药": 1,
+            "港口": 1,
+            "家居用品": 1,
+            "其他建材": 1,
+            "化纤": 1,
+            "医药商业": 1,
+            "建筑工程": 1,
+            "普钢": 1
+          },
+          "market_counts": {
+            "主板": 45,
+            "创业板": 4,
+            "科创板": 1
+          },
+          "overnight_live_score": {
+            "min": 0.6135493827160494,
+            "median": 0.6563040123456789,
+            "max": 0.755030864197531
+          },
+          "live_return_vs_pre_close": {
+            "min": -0.0136798905608754,
+            "median": 0.016013362778015648,
+            "max": 0.0806301171105814
+          },
+          "from_day_high": {
+            "min": -0.0388731079030313,
+            "median": -0.0092517379966356,
+            "max": -0.0015612802498049
+          },
+          "live_range_pos": {
+            "min": 0.2575757575757601,
+            "median": 0.7947368421052627,
+            "max": 0.9793814432989696
+          }
+        },
+        "news_social_context": {
+          "vendor": "akshare_global_keyword_fallback",
+          "degraded": true,
+          "degrade_reasons": [
+            "ticker_news_fetch_failed"
+          ],
+          "ticker_news_success_count": 10,
+          "ticker_news_failure_count": 46,
+          "global_news_success_count": 10,
+          "global_news_failure_count": 0,
+          "social_hot_success_count": 0,
+          "theme_hot_success_count": 11,
+          "social_hot_failure_count": 0,
+          "xueqiu_hot_success_count": 0,
+          "twitter_success_count": 0,
+          "failure_reason_counts": {
+            "RuntimeError": 46
+          },
+          "news_top10_count": 10,
+          "social_top10_count": 5,
+          "global_news_top10_count": 10,
+          "news_ticker_counts": {
+            "688256.SH": 1,
+            "603799.SH": 1,
+            "603833.SH": 1,
+            "000069.SZ": 1,
+            "605117.SH": 1,
+            "300274.SZ": 1,
+            "603993.SH": 1,
+            "002460.SZ": 1,
+            "601877.SH": 1,
+            "001979.SZ": 1
+          },
+          "social_ticker_counts": {
+            "601939.SH": 1,
+            "000301.SZ": 1,
+            "601607.SH": 2,
+            "300059.SZ": 1
+          },
+          "social_hot_summary": {
+            "enabled": false
+          },
+          "theme_hot_summary": {
+            "enabled": true,
+            "candidate_count": 50,
+            "matched_candidate_count": 11,
+            "theme_hit_total_count": 14,
+            "top_matches": [
+              {
+                "ts_code": "688256.SH",
+                "name": "寒武纪",
+                "industry": "半导体",
+                "theme_match_count": 4,
+                "theme_source_count": 1,
+                "theme_names": "AI/算力基础设施|AI/终端智能化",
+                "theme_bonus_score": 0.05
+              },
+              {
+                "ts_code": "000069.SZ",
+                "name": "华侨城Ａ",
+                "industry": "全国地产",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "消费/离境退税/出行",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "001979.SZ",
+                "name": "招商蛇口",
+                "industry": "全国地产",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "消费/离境退税/出行",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "002460.SZ",
+                "name": "赣锋锂业",
+                "industry": "小金属",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "新能源/储能/锂电",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "300274.SZ",
+                "name": "阳光电源",
+                "industry": "电气设备",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "新能源/储能/锂电",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "600111.SH",
+                "name": "北方稀土",
+                "industry": "小金属",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "新能源/储能/锂电",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "601877.SH",
+                "name": "正泰电器",
+                "industry": "电气设备",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "新能源/储能/锂电",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "603799.SH",
+                "name": "华友钴业",
+                "industry": "小金属",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "新能源/储能/锂电",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "603833.SH",
+                "name": "欧派家居",
+                "industry": "家居用品",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "消费/离境退税/出行",
+                "theme_bonus_score": 0.03
+              },
+              {
+                "ts_code": "603993.SH",
+                "name": "洛阳钼业",
+                "industry": "小金属",
+                "theme_match_count": 1,
+                "theme_source_count": 1,
+                "theme_names": "新能源/储能/锂电",
+                "theme_bonus_score": 0.03
+              }
+            ]
+          },
+          "xueqiu_hot_summary": {
+            "enabled": false
+          },
+          "twitter_summary": {
+            "enabled": false
+          },
+          "notes": [
+            "ticker_news_fetch_failed:600188.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600886.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:688256.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600027.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600011.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600362.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000630.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000333.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601901.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600690.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000792.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_used_global_keyword_fallback",
+            "ticker_news_fetch_failed:300124.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601816.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000166.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600887.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:300122.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600018.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:603799.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:603833.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000069.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:605117.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000786.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601838.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601898.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000408.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601318.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:300274.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601336.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600919.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_used_global_keyword_fallback",
+            "ticker_news_fetch_failed:601059.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601881.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_used_global_keyword_fallback",
+            "ticker_news_fetch_failed:603993.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:603195.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_used_global_keyword_fallback",
+            "ticker_news_fetch_failed:002460.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600015.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600795.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601995.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000157.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601100.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601377.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601877.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:000983.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:001979.SZ:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600111.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:601390.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_fetch_failed:600019.SH:RuntimeError:No available vendor for 'get_news'. Errors: akshare: empty result | tushare: empty result",
+            "ticker_news_proxy_recovered:11:688256.SH|603799.SH|603833.SH|000069.SZ|605117.SH|300274.SZ|603993.SH|002460.SZ|601877.SH|001979.SZ|600111.SH"
+          ]
+        },
+        "openclaw_context": null,
+        "elapsed_seconds": 100.428
+      },
+      "paths": {
+        "heavy_review_report": "data/output_20260629/2026-06-29/20260629_155001/02_heavy_review/heavy_review_report.md",
+        "heavy_review_scores": "data/output_20260629/2026-06-29/20260629_155001/02_heavy_review/heavy_review_scores.csv",
+        "heavy_selected_top15": "data/output_20260629/2026-06-29/20260629_155001/02_heavy_review/heavy_selected_top15.csv",
+        "heavy_review_state": "data/output_20260629/2026-06-29/20260629_155001/02_heavy_review/heavy_review_state.json",
+        "heavy_review_parse_manifest": "data/output_20260629/2026-06-29/20260629_155001/02_heavy_review/heavy_review_parse_manifest.json"
+      }
+    },
+    "light": {
+      "state": {
+        "mode": "fast_one_shot_review_after_heavy",
+        "trade_date": "2026-06-29",
+        "llm": "yuanlan4:chat",
+        "candidate_count": 15,
+        "target_top_n": 5,
+        "snapshot_time_hint": "15:47:58",
+        "summary": {
+          "candidate_count": 15,
+          "source": "live_preclose_buffer",
+          "industry_counts": {
+            "火力发电": 2,
+            "铜": 2,
+            "半导体": 1,
+            "煤炭开采": 1,
+            "水力发电": 1,
+            "小金属": 1,
+            "电气设备": 1,
+            "家用电器": 1,
+            "农药化肥": 1,
+            "银行": 1,
+            "电器仪表": 1,
+            "铁路": 1,
+            "证券": 1
+          },
+          "market_counts": {
+            "主板": 13,
+            "科创板": 1,
+            "创业板": 1
+          },
+          "overnight_live_score": {
+            "min": 0.6597993827160495,
+            "median": 0.6943364197530866,
+            "max": 0.755030864197531
+          },
+          "live_return_vs_pre_close": {
+            "min": 0.0051124744376278,
+            "median": 0.0232558139534884,
+            "max": 0.0806301171105814
+          },
+          "from_day_high": {
+            "min": -0.0388731079030313,
+            "median": -0.0062402496099843,
+            "max": -0.002202643171806
+          },
+          "live_range_pos": {
+            "min": 0.5084467771034933,
+            "median": 0.8292682926829283,
+            "max": 0.9500000000000012
+          }
+        },
+        "news_social_context": null,
+        "openclaw_context": null,
+        "elapsed_seconds": 107.962,
+        "light_include_news_social_context": false
+      },
+      "paths": {
+        "agent_review_report": "data/output_20260629/2026-06-29/20260629_155001/03_light_review/agent_review_report.md",
+        "agent_review_scores": "data/output_20260629/2026-06-29/20260629_155001/03_light_review/agent_review_scores.csv",
+        "agent_review_state": "data/output_20260629/2026-06-29/20260629_155001/03_light_review/agent_review_state.json",
+        "agent_review_parse_manifest": "data/output_20260629/2026-06-29/20260629_155001/03_light_review/agent_review_parse_manifest.json"
+      }
+    },
+    "final": {
+      "features": "data/output_20260629/2026-06-29/20260629_155001/04_final_fusion/live_features_20260629_final_top5_pool50.csv",
+      "scored": "data/output_20260629/2026-06-29/20260629_155001/04_final_fusion/live_scored_20260629_final_top5_pool50.csv",
+      "candidate_pool": "data/output_20260629/2026-06-29/20260629_155001/04_final_fusion/live_candidate_pool_20260629_final_top5_pool50.csv",
+      "selected": "data/output_20260629/2026-06-29/20260629_155001/04_final_fusion/live_selected_20260629_final_top5_pool50.csv",
+      "summary": "data/output_20260629/2026-06-29/20260629_155001/04_final_fusion/live_summary_20260629_final_top5_pool50.md"
+    }
+  },
+  "rows": {
+    "recall_candidate_pool": 50,
+    "heavy_selected_top15": 15,
+    "final_selected": 5
+  }
+}

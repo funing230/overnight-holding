@@ -1,0 +1,61 @@
+{
+  "mode": "fast_one_shot_review_after_heavy",
+  "trade_date": "2026-06-30",
+  "llm": "yuanlan4:chat",
+  "candidate_count": 15,
+  "target_top_n": 5,
+  "snapshot_time_hint": "16:15:00",
+  "summary": {
+    "candidate_count": 15,
+    "source": "live_preclose_buffer",
+    "industry_counts": {
+      "电气设备": 2,
+      "化纤": 1,
+      "证券": 1,
+      "软饮料": 1,
+      "铜": 1,
+      "小金属": 1,
+      "家用电器": 1,
+      "IT设备": 1,
+      "电器仪表": 1,
+      "农药化肥": 1,
+      "水力发电": 1,
+      "化工原料": 1,
+      "白酒": 1,
+      "工程机械": 1
+    },
+    "market_counts": {
+      "主板": 12,
+      "创业板": 3
+    },
+    "overnight_live_score": {
+      "min": 0.6112345679012345,
+      "median": 0.6933487654320988,
+      "max": 0.7190432098765432
+    },
+    "live_return_vs_pre_close": {
+      "min": -0.0015698587127158,
+      "median": 0.0132743362831857,
+      "max": 0.0618261826182617
+    },
+    "from_day_high": {
+      "min": -0.022004000727405,
+      "median": -0.0087752053771471,
+      "max": -0.0007052186177715
+    },
+    "live_range_pos": {
+      "min": 0.5813148788927334,
+      "median": 0.7947976878612715,
+      "max": 0.9677419354838716
+    }
+  },
+  "news_social_context": null,
+  "openclaw_context": {
+    "loaded": false,
+    "reason": "no_context_found_under_root",
+    "trade_date": "2026-06-30",
+    "root": "data/openclaw_context"
+  },
+  "elapsed_seconds": 88.753,
+  "light_include_news_social_context": false
+}
