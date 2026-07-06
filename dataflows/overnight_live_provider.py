@@ -563,6 +563,17 @@ def _load_kronos_features(kronos_features_path: str | Path) -> pd.DataFrame:
     feat["kronos_degraded"] = feat["kronos_degraded"].astype(str).str.lower().isin(["true", "1", "yes"])
     return feat.drop_duplicates("ts_code", keep="last")
 
+def _load_dsa_scores(dsa_scores_path: str | Path) -> pd.DataFrame:
+    """Load DSA Path B analysis scores."""
+    p = Path(dsa_scores_path)
+    if not p.exists():
+        return pd.DataFrame(columns=["ts_code", "dsa_score", "dsa_operation", "dsa_available"])
+    df = pd.read_csv(p)
+    for col, default in [("dsa_score", 0.5), ("dsa_operation", "hold"), ("dsa_available", False)]:
+        if col not in df.columns:
+            df[col] = default
+    return df[["ts_code", "dsa_score", "dsa_operation", "dsa_available"]]
+
 def _load_xueqiu_hot_features(xueqiu_hot_features_path):
     feature_path = Path(xueqiu_hot_features_path)
     if not feature_path.exists():
@@ -606,6 +617,7 @@ def apply_multi_stage_review_fusion(
     scored: pd.DataFrame,
     selector_review_scores_path: str | Path | None = None,
     scorer_review_scores_path: str | Path | None = None,
+    dsa_scores_path: str | Path | None = None,
     social_hot_features_path: str | Path | None = None,
     theme_hot_features_path: str | Path | None = None,
     openclaw_features_path: str | Path | None = None,
@@ -616,6 +628,7 @@ def apply_multi_stage_review_fusion(
     live_weight: float = 0.60,
     heavy_weight: float = 0.25,
     light_weight: float = 0.15,
+    dsa_weight: float = 0.05,
 ) -> pd.DataFrame:
     """Fuse deterministic live score with selector Top50 review and scorer Top15 review.
 
@@ -662,6 +675,9 @@ def apply_multi_stage_review_fusion(
         ("ashare_enrichment_risk_penalty", 0.0),
         ("kronos_pred_return_1d", pd.NA),
         ("kronos_degraded", False),
+        ("dsa_score", 0.5),
+        ("dsa_operation", "hold"),
+        ("dsa_available", False),
     ]:
         out[col] = default
 
@@ -752,6 +768,15 @@ def apply_multi_stage_review_fusion(
                     out[col] = out[review_col]
                 out = out.drop(columns=[review_col])
 
+    if dsa_scores_path:
+        dsa = _load_dsa_scores(dsa_scores_path)
+        out = out.merge(dsa, on="ts_code", how="left", suffixes=("", "_dsa"))
+        for col in ["dsa_score", "dsa_operation", "dsa_available"]:
+            review_col = f"{col}_dsa"
+            if review_col in out.columns:
+                out[col] = out[review_col].combine_first(out[col])
+                out = out.drop(columns=[review_col])
+
     out["heavy_score"] = pd.to_numeric(out["heavy_score"], errors="coerce").fillna(0.5)
     out["heavy_adjustment"] = pd.to_numeric(out["heavy_adjustment"], errors="coerce").fillna(0.0)
     out["heavy_veto"] = _boolish_series(out["heavy_veto"])
@@ -790,6 +815,7 @@ def apply_multi_stage_review_fusion(
         live_weight * out["overnight_live_score"]
         + heavy_weight * out["heavy_score"]
         + light_weight * out["agent_score"]
+        + dsa_weight * out["dsa_score"]
         + out["heavy_adjustment"]
         + out["agent_adjustment"]
         + out["social_bonus_score"]
@@ -850,10 +876,12 @@ def run_live_inference(
     twitter_features_path: str | Path | None = None,
     ashare_enrichment_features_path: str | Path | None = None,
     kronos_features_path: str | Path | None = None,
+    dsa_scores_path: str | Path | None = None,
     live_weight: float = 0.75,
     agent_weight: float = 0.25,
     heavy_weight: float = 0.25,
     light_weight: float = 0.15,
+    dsa_weight: float = 0.05,
 ) -> dict[str, Any]:
     cfg = LiveOvernightConfig(
         history_feature_table_path=Path(history_feature_table_path or DEFAULT_CONFIG["overnight_feature_table_path"]),
@@ -878,9 +906,11 @@ def run_live_inference(
             twitter_features_path=twitter_features_path,
             ashare_enrichment_features_path=ashare_enrichment_features_path,
             kronos_features_path=kronos_features_path,
+            dsa_scores_path=dsa_scores_path,
             live_weight=live_weight,
             heavy_weight=heavy_weight,
             light_weight=light_weight,
+            dsa_weight=dsa_weight,
         )
     else:
         scored = apply_scorer_review_fusion(

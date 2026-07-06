@@ -47,6 +47,7 @@ from dataflows.ashare_enrichment_provider import build_ashare_enrichment_feature
 from llm.pool import LLMPool
 from dataflows.risk_veto_provider import build_risk_veto, RiskVetoPool
 from dataflows.performance_tracker import save_predictions, build_performance_context
+from dataflows.dsa_path_provider import run_dsa_analysis
 
 DEFAULT_OUT_ROOT = Path("data/overnight_live_multistage")
 
@@ -418,6 +419,8 @@ def main() -> None:
     p.add_argument("--disable-ashare-business", action="store_true", help="Skip THS business/company profile enrichment")
     p.add_argument("--kronos-features-path", default=None, help="Path to pre-computed Kronos features CSV (offline; run build_kronos_features.py first)")
     p.add_argument("--performance-dir", default="data/performance", help="Directory for performance tracking")
+    p.add_argument("--enable-dsa-path", action="store_true", help="Enable daily_stock_analysis Path B multi-agent review (requires DSA deps)")
+    p.add_argument("--dsa-weight", type=float, default=0.05, help="DSA Path B weight in final fusion (default: 0.05)")
     args = p.parse_args()
 
     run_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -426,15 +429,16 @@ def main() -> None:
         run_ts = run_dir.name
     else:
         run_dir = Path(args.out_root) / args.trade_date / run_ts
-    recall_dir, minute_prefetch_dir, news_social_dir, ashare_enrich_dir, heavy_dir, light_dir, final_dir = (
-        run_dir / "01_recall_top50",
-        run_dir / "01b_minute_prefetch",
-        run_dir / "01c_news_social_top10",
-        run_dir / "01d_ashare_enrichment",
-        run_dir / "02_selector_review",
-        run_dir / "03_scorer_review",
-        run_dir / "04_final_fusion",
-    )
+    recall_dir, minute_prefetch_dir, news_social_dir, ashare_enrich_dir, heavy_dir, dsa_dir, light_dir, final_dir = (
+     run_dir / "01_recall_top50",
+     run_dir / "01b_minute_prefetch",
+     run_dir / "01c_news_social_top10",
+     run_dir / "01d_ashare_enrichment",
+     run_dir / "02_selector_review",
+     run_dir / "02b_dsa_path",
+     run_dir / "03_scorer_review",
+     run_dir / "04_final_fusion",
+ )
 
     pre_hint = _snapshot_time_hint(args.prefilter_snapshot_csv)
     final_snapshot = args.final_snapshot_csv or args.prefilter_snapshot_csv
@@ -526,6 +530,21 @@ def main() -> None:
     else:
         light = _run_light(args, heavy["paths"]["selector_selected_top15"], light_dir, pre_hint, news_social_context=news_social["context"], openclaw_context=news_social.get("openclaw_context"))
 
+    # ── Stage 2b: DSA Path B (daily_stock_analysis multi-agent review) ──
+    dsa_scores_path = None
+    if args.enable_dsa_path:
+        _ensure_dir(dsa_dir)
+        dsa_path = dsa_dir / "dsa_scores.csv"
+        try:
+            top15_df = pd.read_csv(heavy["paths"]["selector_selected_top15"])
+            ts_codes = top15_df["ts_code"].tolist()[0:15]
+            dsa_df = run_dsa_analysis(ts_codes, args.trade_date)
+            dsa_df.to_csv(dsa_path, index=False)
+            dsa_scores_path = str(dsa_path)
+            print(f"DSA Path B scores: {dsa_path} (available={dsa_df['dsa_available'].iloc[0]})")
+        except Exception as e:
+            print(f"DSA Path B skipped: {e}")
+
     final_paths_guess = {
         "features": str(final_dir / f"live_features_{_fmt_date(args.trade_date)}_final_top{args.final_top_n}_pool{args.final_candidate_pool_size}.csv"),
         "scored": str(final_dir / f"live_scored_{_fmt_date(args.trade_date)}_final_top{args.final_top_n}_pool{args.final_candidate_pool_size}.csv"),
@@ -552,9 +571,11 @@ def main() -> None:
             twitter_features_path=news_social.get("twitter_features_path"),
             ashare_enrichment_features_path=None if ashare_enrichment is None else ashare_enrichment.get("features_path"),
             kronos_features_path=args.kronos_features_path,
+            dsa_scores_path=dsa_scores_path,
             live_weight=args.live_weight,
             heavy_weight=args.heavy_weight,
             light_weight=args.light_weight,
+            dsa_weight=args.dsa_weight,
         )
         final_paths = _write_inference_outputs(final, final_dir, args.final_top_n, args.final_candidate_pool_size, "final")
 
