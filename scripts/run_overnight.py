@@ -46,6 +46,7 @@ from dataflows.openclaw_context_provider import resolve_openclaw_context, build_
 from dataflows.ashare_enrichment_provider import build_ashare_enrichment_features
 from llm.pool import LLMPool
 from dataflows.risk_veto_provider import build_risk_veto, RiskVetoPool
+from dataflows.performance_tracker import save_predictions, build_performance_context
 
 DEFAULT_OUT_ROOT = Path("data/overnight_live_multistage")
 
@@ -131,6 +132,10 @@ def _run_heavy(args, candidate_pool_csv: str, out_dir: Path, snapshot_hint: str 
         lines.append("\nHard-veto stocks should be assigned selector_tier='reject' with selector_veto=true.")
         payload += "\n" + "\n".join(lines)
     _ensure_dir(out_dir)
+    # ── Inject historical performance feedback ──
+    perf_ctx = build_performance_context(args.trade_date)
+    if perf_ctx:
+        payload = perf_ctx + "\n\n" + payload
     (out_dir / "selector_review_prompt.md").write_text(payload + "\n", encoding="utf-8")
     if args.dry_run_heavy:
         reviews = [{"ts_code": r["ts_code"], "selector_score": 0.5, "selector_tier": "watch", "selector_veto": False, "selector_adjustment": 0.0, "selector_keep_rank": i + 1, "selector_reason": "dry_run_selector_neutral", "selector_risk_flags": []} for i, r in pool.reset_index(drop=True).iterrows()]
@@ -412,6 +417,7 @@ def main() -> None:
     p.add_argument("--disable-ashare-research", action="store_true", help="Skip Eastmoney research report enrichment")
     p.add_argument("--disable-ashare-business", action="store_true", help="Skip THS business/company profile enrichment")
     p.add_argument("--kronos-features-path", default=None, help="Path to pre-computed Kronos features CSV (offline; run build_kronos_features.py first)")
+    p.add_argument("--performance-dir", default="data/performance", help="Directory for performance tracking")
     args = p.parse_args()
 
     run_ts = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -573,6 +579,12 @@ def main() -> None:
     print(f"Selector Top15: {heavy['paths']['selector_selected_top15']}")
     print(f"Scorer scores: {light['paths']['scorer_review_scores']}")
     print(f"Final selected: {final_paths['selected']}")
+    # ── Save predictions for next-day performance tracking ──
+    try:
+        pred_path = save_predictions(args.trade_date, final_paths["selected"])
+        print(f"Predictions saved: {pred_path}")
+    except Exception as e:
+        print(f"Prediction save skipped: {e}")
 
 
 if __name__ == "__main__":
